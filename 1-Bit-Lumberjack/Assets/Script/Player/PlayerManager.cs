@@ -5,6 +5,9 @@ using UnityEngine.EventSystems;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
+    public delegate void PlayerAttackEvent(int amount);
+    public event PlayerAttackEvent OnPlayerAttack;
+
     //Ref
     [HideInInspector] public Animator anim;
 
@@ -12,7 +15,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [HideInInspector] public Vector2 touchPoint;
 
     //Variable
-
+    public int curAttackDamage;
 
     private void OnEnable()
     {
@@ -38,7 +41,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void Attack()
     {
-        Debug.Log("Attack");
+        OnPlayerAttack?.Invoke(curAttackDamage);
         anim.Play("Player_Attack");
     }
 

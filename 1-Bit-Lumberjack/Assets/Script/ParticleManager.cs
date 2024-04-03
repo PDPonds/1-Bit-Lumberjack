@@ -7,6 +7,11 @@ public class ParticleManager : Singleton<ParticleManager>
 {
     public Particle[] particles;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     public void SpawnParticle(string name, Vector3 pos)
     {
         Particle p = Array.Find(particles, p => p.name == name);
