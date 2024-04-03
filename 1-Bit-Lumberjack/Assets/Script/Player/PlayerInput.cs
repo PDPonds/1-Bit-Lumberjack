@@ -28,9 +28,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""id"": ""e13e3ea2-bf69-49ce-90c3-eaf98b1d55bd"",
             ""actions"": [
                 {
-                    ""name"": ""Touch"",
+                    ""name"": ""Tap"",
                     ""type"": ""Button"",
-                    ""id"": ""c6623ff7-c603-4be1-ad27-fb3c0542a644"",
+                    ""id"": ""9f10084c-f940-43df-aa40-5d2c42fb3bec"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -49,23 +49,23 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""1b671264-b693-4e77-a0f7-86b84f6bde92"",
-                    ""path"": ""<Touchscreen>/touch*/Press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Touch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""82243ff0-9057-4d02-843c-98e00f81142b"",
                     ""path"": ""<Touchscreen>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TouchPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b491c494-7401-4725-a678-d1ae69a04c50"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -76,7 +76,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
 }");
         // PlayerAction
         m_PlayerAction = asset.FindActionMap("PlayerAction", throwIfNotFound: true);
-        m_PlayerAction_Touch = m_PlayerAction.FindAction("Touch", throwIfNotFound: true);
+        m_PlayerAction_Tap = m_PlayerAction.FindAction("Tap", throwIfNotFound: true);
         m_PlayerAction_TouchPosition = m_PlayerAction.FindAction("TouchPosition", throwIfNotFound: true);
     }
 
@@ -139,13 +139,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     // PlayerAction
     private readonly InputActionMap m_PlayerAction;
     private List<IPlayerActionActions> m_PlayerActionActionsCallbackInterfaces = new List<IPlayerActionActions>();
-    private readonly InputAction m_PlayerAction_Touch;
+    private readonly InputAction m_PlayerAction_Tap;
     private readonly InputAction m_PlayerAction_TouchPosition;
     public struct PlayerActionActions
     {
         private @PlayerInput m_Wrapper;
         public PlayerActionActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Touch => m_Wrapper.m_PlayerAction_Touch;
+        public InputAction @Tap => m_Wrapper.m_PlayerAction_Tap;
         public InputAction @TouchPosition => m_Wrapper.m_PlayerAction_TouchPosition;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
@@ -156,9 +156,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionActionsCallbackInterfaces.Add(instance);
-            @Touch.started += instance.OnTouch;
-            @Touch.performed += instance.OnTouch;
-            @Touch.canceled += instance.OnTouch;
+            @Tap.started += instance.OnTap;
+            @Tap.performed += instance.OnTap;
+            @Tap.canceled += instance.OnTap;
             @TouchPosition.started += instance.OnTouchPosition;
             @TouchPosition.performed += instance.OnTouchPosition;
             @TouchPosition.canceled += instance.OnTouchPosition;
@@ -166,9 +166,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActionActions instance)
         {
-            @Touch.started -= instance.OnTouch;
-            @Touch.performed -= instance.OnTouch;
-            @Touch.canceled -= instance.OnTouch;
+            @Tap.started -= instance.OnTap;
+            @Tap.performed -= instance.OnTap;
+            @Tap.canceled -= instance.OnTap;
             @TouchPosition.started -= instance.OnTouchPosition;
             @TouchPosition.performed -= instance.OnTouchPosition;
             @TouchPosition.canceled -= instance.OnTouchPosition;
@@ -191,7 +191,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public PlayerActionActions @PlayerAction => new PlayerActionActions(this);
     public interface IPlayerActionActions
     {
-        void OnTouch(InputAction.CallbackContext context);
+        void OnTap(InputAction.CallbackContext context);
         void OnTouchPosition(InputAction.CallbackContext context);
     }
 }

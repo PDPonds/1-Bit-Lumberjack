@@ -5,13 +5,17 @@ using UnityEngine;
 public class InputSystem : MonoBehaviour
 {
     PlayerInput playerInput;
+
+    public delegate void TapEvent();
+    public static event TapEvent OnTapEvent;
+
     private void OnEnable()
     {
         if (playerInput == null)
         {
             playerInput = new PlayerInput();
 
-            playerInput.PlayerAction.Touch.performed += i => DebugText();
+            playerInput.PlayerAction.Tap.performed += i => OnTapEvent?.Invoke();
 
             playerInput.PlayerAction.TouchPosition.performed += i =>
             PlayerManager.Instance.touchPoint = i.ReadValue<Vector2>();
@@ -23,11 +27,6 @@ public class InputSystem : MonoBehaviour
     private void OnDisable()
     {
         playerInput.Disable();
-    }
-
-    void DebugText()
-    {
-        Debug.Log("Tab");
     }
 
 }

@@ -6,9 +6,9 @@
             "id": "e13e3ea2-bf69-49ce-90c3-eaf98b1d55bd",
             "actions": [
                 {
-                    "name": "Touch",
+                    "name": "Tap",
                     "type": "Button",
-                    "id": "c6623ff7-c603-4be1-ad27-fb3c0542a644",
+                    "id": "9f10084c-f940-43df-aa40-5d2c42fb3bec",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -27,23 +27,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "1b671264-b693-4e77-a0f7-86b84f6bde92",
-                    "path": "<Touchscreen>/touch*/Press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Touch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "82243ff0-9057-4d02-843c-98e00f81142b",
                     "path": "<Touchscreen>/position",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "TouchPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b491c494-7401-4725-a678-d1ae69a04c50",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
