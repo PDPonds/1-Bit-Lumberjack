@@ -15,10 +15,11 @@ public class InputSystem : MonoBehaviour
         {
             playerInput = new PlayerInput();
 
-            playerInput.PlayerAction.Tap.performed += i => OnTapEvent?.Invoke();
-
             playerInput.PlayerAction.TouchPosition.performed += i =>
             PlayerManager.Instance.touchPoint = i.ReadValue<Vector2>();
+
+            playerInput.PlayerAction.Tap.performed += i => OnTapEvent?.Invoke();
+            
         }
 
         playerInput.Enable();
@@ -28,5 +29,4 @@ public class InputSystem : MonoBehaviour
     {
         playerInput.Disable();
     }
-
 }

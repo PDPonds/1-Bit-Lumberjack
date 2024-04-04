@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public delegate void TapEvent();
-    public event TapEvent OnPlayerTap;
     public delegate void PlayerAttackEvent(int amount);
     public event PlayerAttackEvent OnPlayerAttack;
 
@@ -14,7 +12,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [HideInInspector] public Animator anim;
 
     // Input
-    [HideInInspector] public Vector2 touchPoint;
+    /*[HideInInspector]*/ public Vector2 touchPoint;
 
     //Variable
     public int curAttackDamage;
@@ -31,7 +29,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     public void Tap()
     {
-        OnPlayerTap?.Invoke();
+        ParticleManager.Instance.SpawnParticle("TapParticle", GetWorldPosFormTouchPoint3D());
         Attack();
         TryGetTouchObject();
     }

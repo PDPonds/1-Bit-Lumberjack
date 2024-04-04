@@ -7,17 +7,13 @@ public class ParticleManager : Singleton<ParticleManager>
 {
     public Particle[] particles;
 
-    private void OnEnable()
-    {
-        PlayerManager.Instance.OnPlayerTap += SpawnTapParticle;
-    }
 
     private void Awake()
     {
         DontDestroyOnLoad(this);
     }
 
-    void SpawnParticle(string name, Vector3 pos)
+    public void SpawnParticle(string name, Vector3 pos)
     {
         Particle p = Array.Find(particles, p => p.name == name);
         if (p == null) return;
@@ -27,10 +23,6 @@ public class ParticleManager : Singleton<ParticleManager>
         Destroy(pObj, a.GetCurrentAnimatorStateInfo(0).length);
     }
 
-    void SpawnTapParticle()
-    {
-        SpawnParticle("TapParticle", PlayerManager.Instance.GetWorldPosFormTouchPoint3D());
-    }
 }
 
 [Serializable]
