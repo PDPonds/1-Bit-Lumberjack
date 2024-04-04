@@ -21,7 +21,7 @@ public class EnemyController : Singleton<EnemyController>
 
     private void OnEnable()
     {
-        GameManager.Instance.OnNextState += SetupEnemy;
+        //GameManager.Instance.OnNextState += SetupEnemy;
         PlayerManager.Instance.OnPlayerAttack += TakeDamage;
     }
 
@@ -81,6 +81,7 @@ public class EnemyController : Singleton<EnemyController>
 
     void Dead()
     {
+        SetupEnemy();
         OnEnemyDead?.Invoke();
     }
 

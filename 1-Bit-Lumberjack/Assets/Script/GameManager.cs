@@ -36,7 +36,6 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         EnemyController.Instance.OnEnemyDead += NextState;
-        EnemyController.Instance.OnEnemyTakeDamage += PlaySceneShake;
     }
 
     private void Start()
@@ -49,31 +48,6 @@ public class GameManager : Singleton<GameManager>
     {
         UpdateState();
     }
-
-    #region Game FeedBack
-
-    void PlaySceneShake()
-    {
-        StartCoroutine(SceneShake(sceneShakeDuration, sceneShakeMagnitude));
-    }
-
-    IEnumerator SceneShake(float duration, float magnitude)
-    {
-        Vector3 originalPos = Camera.main.transform.localPosition;
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-
-            Camera.main.transform.localPosition = new Vector3(x, y, originalPos.z);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        Camera.main.transform.localPosition = originalPos;
-    }
-
-    #endregion
 
     #region Game State
 

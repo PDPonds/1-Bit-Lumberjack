@@ -12,7 +12,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [HideInInspector] public Animator anim;
 
     // Input
-    /*[HideInInspector]*/ public Vector2 touchPoint;
+    [HideInInspector] public Vector2 touchPoint;
 
     //Variable
     public int curAttackDamage;
