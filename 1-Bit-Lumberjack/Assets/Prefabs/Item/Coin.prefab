@@ -162,4 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 0
-  autoAddCoinTime: 5
+  autoAddCoinTime: 3

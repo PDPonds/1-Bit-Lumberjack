@@ -6,6 +6,7 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     [Header("===== Coin =====")]
+    public Transform coinIcon;
     [SerializeField] TextMeshProUGUI coinText;
     [Header("===== Phase =====")]
     [SerializeField] TextMeshProUGUI phaseText;
