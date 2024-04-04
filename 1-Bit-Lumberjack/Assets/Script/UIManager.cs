@@ -18,6 +18,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] TextMeshProUGUI phaseText;
     [Header("===== State =====")]
     [SerializeField] TextMeshProUGUI stateText;
+    [Header("===== Damage =====")]
+    [SerializeField] TextMeshProUGUI damageCountText;
     [Header("===== Menu =====")]
     [SerializeField] Button axeButton;
     [SerializeField] GameObject axeBorder;
@@ -54,6 +56,12 @@ public class UIManager : Singleton<UIManager>
         UpdateState();
         UpdatePhase();
         UpdateHP();
+        UpdateDamage();
+    }
+
+    void UpdateDamage()
+    {
+        damageCountText.text = PlayerManager.Instance.curAttackDamage.ToString();
     }
 
     void UpdateCoin()
