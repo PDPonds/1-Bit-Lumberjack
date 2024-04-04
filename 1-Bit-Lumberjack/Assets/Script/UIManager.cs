@@ -20,15 +20,6 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.OnNextPhase += UpdatePhase;
     }
 
-    private void OnDisable()
-    {
-        GameManager.Instance.OnAddCoin -= UpdateCoin;
-        GameManager.Instance.OnRemoveCoin -= UpdateCoin;
-        GameManager.Instance.OnNextState -= UpdateState;
-        GameManager.Instance.OnNextPhase -= UpdatePhase;
-
-    }
-
     private void Start()
     {
         UpdateCoin();

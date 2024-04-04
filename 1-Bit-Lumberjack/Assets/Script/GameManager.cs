@@ -39,12 +39,6 @@ public class GameManager : Singleton<GameManager>
         EnemyController.Instance.OnEnemyTakeDamage += PlaySceneShake;
     }
 
-    private void OnDisable()
-    {
-        EnemyController.Instance.OnEnemyDead -= NextState;
-        EnemyController.Instance.OnEnemyTakeDamage -= PlaySceneShake;
-    }
-
     private void Start()
     {
         curState = 1;

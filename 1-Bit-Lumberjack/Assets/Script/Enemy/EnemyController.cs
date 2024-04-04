@@ -25,12 +25,6 @@ public class EnemyController : Singleton<EnemyController>
         PlayerManager.Instance.OnPlayerAttack += TakeDamage;
     }
 
-    private void OnDisable()
-    {
-        GameManager.Instance.OnNextState -= SetupEnemy;
-        PlayerManager.Instance.OnPlayerAttack += TakeDamage;
-    }
-
     private void Start()
     {
         SetupEnemy();
@@ -53,7 +47,7 @@ public class EnemyController : Singleton<EnemyController>
                 if (GameManager.Instance.curPhase > 2)
                 {
                     int GamePhase = GameManager.Instance.curPhase;
-                    int min = ((GamePhase - 1) * 100) / 2;
+                    int min = ((GamePhase - 1) * 100) - 50;
                     int max = (GamePhase - 1) * 100;
                     int hp = Random.Range(min, max);
                     maxHP = hp;
@@ -68,7 +62,9 @@ public class EnemyController : Singleton<EnemyController>
 
                 break;
             case GameState.Boss:
-                curHP = GameManager.Instance.curPhase * 100;
+                int bossHp = GameManager.Instance.curPhase * 100;
+                curHP = bossHp;
+                maxHP = bossHp;
                 break;
         }
     }
