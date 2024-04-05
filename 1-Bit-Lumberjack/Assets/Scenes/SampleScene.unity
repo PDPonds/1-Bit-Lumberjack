@@ -6857,6 +6857,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4320775675351602445, guid: f42ff353be6055e42860be1573608e12, type: 3}
+      propertyPath: particles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320775675351602445, guid: f42ff353be6055e42860be1573608e12, type: 3}
+      propertyPath: particles.Array.data[1].name
+      value: AttackParticle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320775675351602445, guid: f42ff353be6055e42860be1573608e12, type: 3}
+      propertyPath: particles.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 323405185656851349, guid: 5c8243fd6bb49194998571aa880580cc, type: 3}
     - target: {fileID: 5712852001611773223, guid: f42ff353be6055e42860be1573608e12, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -95,6 +95,7 @@ public class EnemyController : Singleton<EnemyController>
     {
         curHP -= amount;
         anim.Play("EnemyTakeDamage");
+        ParticleManager.Instance.SpawnParticle("AttackParticle", transform.position);
         OnEnemyTakeDamage?.Invoke();
         if (curHP <= 0)
         {

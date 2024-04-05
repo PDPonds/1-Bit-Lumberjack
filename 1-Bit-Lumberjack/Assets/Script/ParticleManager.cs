@@ -19,8 +19,16 @@ public class ParticleManager : Singleton<ParticleManager>
         if (p == null) return;
         Vector3 worldPos = new Vector3(pos.x, pos.y, 0f);
         GameObject pObj = Instantiate(p.prefab, worldPos, Quaternion.identity);
-        Animator a = pObj.GetComponent<Animator>();
-        Destroy(pObj, a.GetCurrentAnimatorStateInfo(0).length);
+        if (pObj.TryGetComponent<ParticleParent>(out ParticleParent pParent))
+        {
+            Destroy(pObj, pParent.GetMainParticleTime());
+        }
+        else
+        {
+            Animator a = pObj.GetComponent<Animator>();
+            Destroy(pObj, a.GetCurrentAnimatorStateInfo(0).length);
+        }
+
     }
 
 }
