@@ -32,6 +32,11 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Button achievementButton;
     [SerializeField] GameObject achievementBorder;
     [SerializeField] Button[] closeMenus;
+    [Header("===== Setting =====")]
+    [SerializeField] Button openSettingButton;
+    [SerializeField] GameObject setting;
+    [SerializeField] GameObject settingBorder;
+    [SerializeField] Button closeSettingButton;
 
     private void OnEnable()
     {
@@ -51,8 +56,10 @@ public class UIManager : Singleton<UIManager>
         achievementButton.onClick.AddListener(() => Show(achievementBorder));
         foreach (Button b in closeMenus)
         {
-            b.onClick.AddListener(() => CloseMenu());
+            b.onClick.AddListener(CloseMenu);
         }
+        openSettingButton.onClick.AddListener(OpenSetting);
+        closeSettingButton.onClick.AddListener(CloseSetting);
     }
 
     private void Start()
@@ -126,6 +133,19 @@ public class UIManager : Singleton<UIManager>
             .setOnComplete(() => finish?.Invoke());
     }
 
+    void Scale(GameObject go, Vector2 scale, float time)
+    {
+        LeanTween.scale(go, scale, time)
+            .setEaseInOutCubic();
+    }
+
+    void Scale(GameObject go, Vector2 scale, float time, OnFuncFinsh finish)
+    {
+        LeanTween.scale(go, scale, time)
+            .setEaseInOutCubic()
+            .setOnComplete(() => finish());
+    }
+
     void Show(GameObject go)
     {
         CloseMenuAll();
@@ -150,6 +170,18 @@ public class UIManager : Singleton<UIManager>
         axeBorder.SetActive(false);
         teamBorder.SetActive(false);
         achievementBorder.SetActive(false);
+    }
+
+    void OpenSetting()
+    {
+        setting.SetActive(true);
+        Scale(settingBorder, Vector3.one, 0.5f);
+    }
+
+    void CloseSetting()
+    {
+        Scale(settingBorder, Vector3.zero, 0.5f,
+            () => setting.SetActive(false));
     }
 
 }
