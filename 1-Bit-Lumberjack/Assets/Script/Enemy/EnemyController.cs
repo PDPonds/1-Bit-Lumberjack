@@ -9,6 +9,8 @@ public class EnemyController : Singleton<EnemyController>
     public delegate void EnemyDead();
     public event EnemyDead OnEnemyDead;
 
+    [HideInInspector] public Animator anim;
+
     [Header("===== Enemy =====")]
     public AllEnemy enemys;
     [HideInInspector] public Enemy curEnemy;
@@ -24,6 +26,11 @@ public class EnemyController : Singleton<EnemyController>
     {
         PlayerManager.Instance.OnPlayerAttack += TakeDamage;
         GameManager.Instance.OnExitBossState += SetupEnemy;
+    }
+
+    private void Awake()
+    {
+        anim = enemyVisual.GetComponent<Animator>();
     }
 
     private void Start()
@@ -87,6 +94,7 @@ public class EnemyController : Singleton<EnemyController>
     public void TakeDamage(int amount)
     {
         curHP -= amount;
+        anim.Play("EnemyTakeDamage");
         OnEnemyTakeDamage?.Invoke();
         if (curHP <= 0)
         {
@@ -97,6 +105,7 @@ public class EnemyController : Singleton<EnemyController>
     void Dead()
     {
         SetupEnemy();
+        anim.Play("EnemyDead");
         OnEnemyDead?.Invoke();
     }
 
