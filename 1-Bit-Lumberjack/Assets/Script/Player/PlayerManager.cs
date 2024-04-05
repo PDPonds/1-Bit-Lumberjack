@@ -37,6 +37,7 @@ public class PlayerManager : Singleton<PlayerManager>
     void Attack()
     {
         OnPlayerAttack?.Invoke(curAttackDamage);
+        TextGenerator.Instance.GenerateText(curAttackDamage);
         anim.Play("Player_Attack");
     }
 
