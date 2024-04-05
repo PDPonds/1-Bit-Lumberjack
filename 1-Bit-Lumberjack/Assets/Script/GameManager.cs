@@ -41,10 +41,6 @@ public class GameManager : Singleton<GameManager>
     [HideInInspector] public int curPhase = 1;
     [HideInInspector] public int curState = 1;
 
-    [Header("===== SceneShake =====")]
-    [SerializeField] float sceneShakeDuration;
-    [SerializeField] float sceneShakeMagnitude;
-
     [Header("===== Axe Damage =====")]
     public int curLevelAxe = 1;
     [SerializeField] int startAxeDamage;
@@ -182,7 +178,8 @@ public class GameManager : Singleton<GameManager>
 
     public int CalAxeDamage()
     {
-        int levelMul = curLevelAxe * mulDamagePerLevel;
+        int levelMul = 0;
+        if (curLevelAxe > 1) levelMul = curLevelAxe * mulDamagePerLevel;
         int result = startAxeDamage + levelMul;
         return result;
     }
@@ -203,4 +200,6 @@ public class GameManager : Singleton<GameManager>
     }
 
     #endregion
+
+
 }

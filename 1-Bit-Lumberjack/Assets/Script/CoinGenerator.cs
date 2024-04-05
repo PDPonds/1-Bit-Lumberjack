@@ -9,6 +9,8 @@ public class CoinGenerator : Singleton<CoinGenerator>
     [SerializeField] GameObject coinPrefab;
     [SerializeField] Transform coinSpawnPoint;
 
+    [Range(0, 1)][SerializeField] float dropCoinPercent;
+
     private void OnEnable()
     {
         EnemyController.Instance.OnEnemyDead += GenerateCoin;
@@ -39,7 +41,8 @@ public class CoinGenerator : Singleton<CoinGenerator>
 
     int CalDropCoinAmount()
     {
-        return EnemyController.Instance.maxHP / 2;
+        float drop = EnemyController.Instance.maxHP * dropCoinPercent;
+        return (int)drop;
     }
 
     void GenerateCoin()

@@ -14086,6 +14086,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: maxStatePerPhase
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
       propertyPath: mulCostUpgradeAxe
       value: 18
       objectReference: {fileID: 0}
@@ -14181,6 +14185,18 @@ PrefabInstance:
     - target: {fileID: 6331454417972094622, guid: 298ec0bab94c1a743994b4fd6e9ba0b3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005467632618332650, guid: 298ec0bab94c1a743994b4fd6e9ba0b3, type: 3}
+      propertyPath: maxCoinDrop
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005467632618332650, guid: 298ec0bab94c1a743994b4fd6e9ba0b3, type: 3}
+      propertyPath: minCoinDrop
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9005467632618332650, guid: 298ec0bab94c1a743994b4fd6e9ba0b3, type: 3}
+      propertyPath: dropCoinPercent
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
