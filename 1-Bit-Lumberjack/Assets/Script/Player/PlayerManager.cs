@@ -15,7 +15,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [HideInInspector] public Vector2 touchPoint;
 
     //Variable
-    public int curAttackDamage;
+    [HideInInspector] public int curAttackDamage;
 
     private void OnEnable()
     {
@@ -24,6 +24,7 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Awake()
     {
+        curAttackDamage = GameManager.Instance.CalAxeDamage();
         anim = GetComponent<Animator>();
     }
 

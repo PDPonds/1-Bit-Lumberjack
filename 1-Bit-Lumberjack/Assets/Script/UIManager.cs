@@ -37,6 +37,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] GameObject setting;
     [SerializeField] GameObject settingBorder;
     [SerializeField] Button closeSettingButton;
+    [Header("===== Upgrade Axe =====")]
+    [SerializeField] TextMeshProUGUI axeLevelText;
+    [SerializeField] TextMeshProUGUI axeDamageText;
+    [SerializeField] TextMeshProUGUI axeCostText;
+    [SerializeField] TextMeshProUGUI axeMulDamageText;
+    [SerializeField] Button upgradeAxeButton;
 
     private void OnEnable()
     {
@@ -47,19 +53,24 @@ public class UIManager : Singleton<UIManager>
         EnemyController.Instance.OnEnemyTakeDamage += UpdateHP;
         EnemyController.Instance.OnEnemyDead += UpdateHP;
         GameManager.Instance.OnExitBossState += UpdateState;
+
+        GameManager.Instance.OnUpgradeAxe += UpdateDamage;
+        GameManager.Instance.OnUpgradeAxe += UpdateAxeUpgrade;
     }
 
     private void Awake()
     {
-        axeButton.onClick.AddListener(() => Show(axeBorder));
-        teamButton.onClick.AddListener(() => Show(teamBorder));
-        achievementButton.onClick.AddListener(() => Show(achievementBorder));
+        axeButton.onClick.AddListener(ShowUpgradeAxe);
+        teamButton.onClick.AddListener(ShowUpgradeTeam);
+        achievementButton.onClick.AddListener(ShowGetAchievement);
         foreach (Button b in closeMenus)
         {
             b.onClick.AddListener(CloseMenu);
         }
         openSettingButton.onClick.AddListener(OpenSetting);
         closeSettingButton.onClick.AddListener(CloseSetting);
+
+        upgradeAxeButton.onClick.AddListener(UpgradeAxeBut);
     }
 
     private void Start()
@@ -74,8 +85,35 @@ public class UIManager : Singleton<UIManager>
     private void Update()
     {
         UpdateBossTime();
+        DisableUpgradeAxe();
     }
 
+    #region Upgrade Axe
+
+    void UpdateAxeUpgrade()
+    {
+        axeLevelText.text = $"Lv. {GameManager.Instance.curLevelAxe}";
+        axeDamageText.text = $"Damage : {GameManager.Instance.CalAxeDamage()}";
+        axeCostText.text = $"{GameManager.Instance.CalUpgradeAxeCost()}";
+        axeMulDamageText.text = $"Attack +{GameManager.Instance.mulDamagePerLevel}";
+    }
+
+    void UpgradeAxeBut()
+    {
+        GameManager.Instance.AddAxeLevel();
+    }
+
+    void DisableUpgradeAxe()
+    {
+        if (GameManager.Instance.CheckCoin(GameManager.Instance.CalUpgradeAxeCost()))
+            upgradeAxeButton.interactable = true;
+        else 
+            upgradeAxeButton.interactable = false;
+    }
+
+    #endregion
+
+    #region Boss
     void UpdateBossTime()
     {
         if (bossTimeBorder.activeSelf)
@@ -87,7 +125,9 @@ public class UIManager : Singleton<UIManager>
             bossTimeText.text = cur.ToString("N2");
         }
     }
+    #endregion
 
+    #region UpdateHub
     void UpdateDamage()
     {
         damageCountText.text = PlayerManager.Instance.curAttackDamage.ToString();
@@ -120,6 +160,9 @@ public class UIManager : Singleton<UIManager>
         bossNameText.text = EnemyController.Instance.curEnemy.enemyName;
     }
 
+    #endregion
+
+    #region Function
     void Move(GameObject go, Vector3 pos, float time)
     {
         LeanTween.move(go.GetComponent<RectTransform>(), pos, time)
@@ -154,7 +197,9 @@ public class UIManager : Singleton<UIManager>
         Move(teamBorder, new Vector3(0, 0, 0), 0.5f);
         Move(achievementBorder, new Vector3(0, 0, 0), 0.5f);
     }
+    #endregion
 
+    #region Button
     void CloseMenu()
     {
         Move(axeBorder, new Vector3(0, -450, 0), 0.5f,
@@ -183,5 +228,24 @@ public class UIManager : Singleton<UIManager>
         Scale(settingBorder, Vector3.zero, 0.5f,
             () => setting.SetActive(false));
     }
+
+    void ShowUpgradeAxe()
+    {
+        Show(axeBorder);
+        UpdateAxeUpgrade();
+    }
+
+    void ShowUpgradeTeam()
+    {
+        Show(teamBorder);
+    }
+
+    void ShowGetAchievement()
+    {
+        Show(achievementBorder);
+    }
+
+    #endregion
+
 
 }

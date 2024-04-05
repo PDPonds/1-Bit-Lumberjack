@@ -2440,7 +2440,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -6324,8 +6324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -85}
-  m_SizeDelta: {x: 190, y: 37.5}
+  m_AnchoredPosition: {x: 100, y: -80}
+  m_SizeDelta: {x: 190, y: 48.675003}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1258838546
 MonoBehaviour:
@@ -6976,7 +6976,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 100, y: -5}
-  m_SizeDelta: {x: 190, y: 37.5}
+  m_SizeDelta: {x: 190, y: 26.325}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1431265778
 GameObject:
@@ -8337,6 +8337,11 @@ MonoBehaviour:
   setting: {fileID: 850741943}
   settingBorder: {fileID: 217276469}
   closeSettingButton: {fileID: 665837794}
+  axeLevelText: {fileID: 1061752308}
+  axeDamageText: {fileID: 765465863}
+  axeCostText: {fileID: 681573860}
+  axeMulDamageText: {fileID: 1258838546}
+  upgradeAxeButton: {fileID: 1900840814}
 --- !u!1 &1773822798
 GameObject:
   m_ObjectHideFlags: 0
@@ -9086,7 +9091,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 465.21063, y: -50}
-  m_SizeDelta: {x: 200, y: 90}
+  m_SizeDelta: {x: 200, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1900840814
 MonoBehaviour:
@@ -9186,13 +9191,13 @@ MonoBehaviour:
     m_Left: 5
     m_Right: 5
     m_Top: 5
-    m_Bottom: 5
+    m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 5
+  m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -14075,6 +14080,46 @@ PrefabInstance:
     - target: {fileID: 3823413159459554931, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: startAxeDamage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: mulCostUpgradeAxe
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: mulDamagePerLevel
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: startCostUpgradeAxe
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: maxDamageMulPerLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: maxMulCostUpgradeAxe
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: maxMulDamagePerLevel
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: minDamageMulPerLevel
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: minMulCostUpgradeAxe
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: minMulDamagePerLevel
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8583048967180419868, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
       propertyPath: m_Name

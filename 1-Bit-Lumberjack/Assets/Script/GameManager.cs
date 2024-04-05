@@ -12,14 +12,21 @@ public class GameManager : Singleton<GameManager>
 {
     public delegate void AddCoinEvent();
     public event AddCoinEvent OnAddCoin;
+
     public delegate void RemoveCoinEvent();
     public event RemoveCoinEvent OnRemoveCoin;
+
     public delegate void NextStateEvent();
     public event NextStateEvent OnNextState;
+
     public delegate void NextPhaseEvent();
     public event NextPhaseEvent OnNextPhase;
+
     public delegate void ExitBossStateEvent();
     public event ExitBossStateEvent OnExitBossState;
+
+    public delegate void UpgradeAxeEvent();
+    public event UpgradeAxeEvent OnUpgradeAxe;
 
     [Header("===== Game State =====")]
     public GameState curGameState;
@@ -37,6 +44,15 @@ public class GameManager : Singleton<GameManager>
     [Header("===== SceneShake =====")]
     [SerializeField] float sceneShakeDuration;
     [SerializeField] float sceneShakeMagnitude;
+
+    [Header("===== Axe Damage =====")]
+    public int curLevelAxe = 1;
+    [SerializeField] int startAxeDamage;
+    [SerializeField] int startCostUpgradeAxe;
+    [Header("- MulCost")]
+    [SerializeField] int mulCostUpgradeAxe;
+    [Header("- MulDamage")]
+    public int mulDamagePerLevel;
 
     private void OnEnable()
     {
@@ -114,6 +130,11 @@ public class GameManager : Singleton<GameManager>
         OnRemoveCoin?.Invoke();
     }
 
+    public bool CheckCoin(int amount)
+    {
+        return curCoin >= amount;
+    }
+
     #endregion
 
     #region Phase And State
@@ -157,4 +178,29 @@ public class GameManager : Singleton<GameManager>
 
     #endregion
 
+    #region Axe
+
+    public int CalAxeDamage()
+    {
+        int levelMul = curLevelAxe * mulDamagePerLevel;
+        int result = startAxeDamage + levelMul;
+        return result;
+    }
+
+    public int CalUpgradeAxeCost()
+    {
+        int result = curLevelAxe * mulCostUpgradeAxe;
+        return result;
+    }
+
+    public void AddAxeLevel()
+    {
+        int cost = CalUpgradeAxeCost();
+        RemoveCoin(cost);
+        curLevelAxe++;
+        PlayerManager.Instance.curAttackDamage = CalAxeDamage();
+        OnUpgradeAxe?.Invoke();
+    }
+
+    #endregion
 }
