@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FirstTest
   m_EditorClassIdentifier: 
   enemyName: First
-  enemySprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  enemySprite: {fileID: 21300000, guid: 6052849c9f3b11841ba63cc7def5b147, type: 3}

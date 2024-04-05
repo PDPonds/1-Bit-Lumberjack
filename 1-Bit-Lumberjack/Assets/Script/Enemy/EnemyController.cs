@@ -11,6 +11,7 @@ public class EnemyController : Singleton<EnemyController>
 
     [Header("===== Enemy =====")]
     public AllEnemy enemys;
+    [HideInInspector] public Enemy curEnemy;
 
     [Header("===== HP =====")]
     public int maxHP;
@@ -21,7 +22,6 @@ public class EnemyController : Singleton<EnemyController>
 
     private void OnEnable()
     {
-        //GameManager.Instance.OnNextState += SetupEnemy;
         PlayerManager.Instance.OnPlayerAttack += TakeDamage;
     }
 
@@ -32,9 +32,23 @@ public class EnemyController : Singleton<EnemyController>
 
     public void SetupEnemy()
     {
-        int enemyIndex = Random.Range(0, enemys.enemys.Count);
+        int enemyIndex = 0;
         SpriteRenderer enemySpriteRen = enemyVisual.GetComponent<SpriteRenderer>();
-        enemySpriteRen.sprite = enemys.enemys[enemyIndex].enemySprite;
+
+        if (GameManager.Instance.curState == GameManager.Instance.maxStatePerPhase - 1)
+        {
+            enemyIndex = Random.Range(0, enemys.boss.Count);
+            curEnemy = enemys.boss[enemyIndex];
+            enemySpriteRen.sprite = enemys.boss[enemyIndex].enemySprite;
+        }
+        else
+        {
+            enemyIndex = Random.Range(0, enemys.enemys.Count);
+            curEnemy = enemys.enemys[enemyIndex];
+            enemySpriteRen.sprite = enemys.enemys[enemyIndex].enemySprite;
+        }
+
+
         CalAndResetHP();
     }
 

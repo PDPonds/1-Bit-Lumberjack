@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0206a124a6a586146b575e08e6092539, type: 3}
-  m_Name: SecondTest
+  m_Name: ThirdTest
   m_EditorClassIdentifier: 
-  enemyName: Second
-  enemySprite: {fileID: 21300000, guid: ca41694b285de794fb82f19b98897afd, type: 3}
+  enemyName: Third
+  enemySprite: {fileID: 21300000, guid: b8eff33fe1dc01b439f587f230085705, type: 3}

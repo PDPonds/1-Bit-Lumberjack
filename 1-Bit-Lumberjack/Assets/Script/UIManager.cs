@@ -11,9 +11,10 @@ public class UIManager : Singleton<UIManager>
     [Header("===== Coin =====")]
     public Transform coinIcon;
     [SerializeField] TextMeshProUGUI coinText;
-    [Header("===== HP =====")]
+    [Header("===== Boss =====")]
     [SerializeField] Image hpFill;
     [SerializeField] TextMeshProUGUI hpText;
+    [SerializeField] TextMeshProUGUI bossNameText;
     [Header("===== Phase =====")]
     [SerializeField] TextMeshProUGUI phaseText;
     [Header("===== State =====")]
@@ -88,6 +89,7 @@ public class UIManager : Singleton<UIManager>
         float percent = (float)cur / (float)max;
         hpFill.fillAmount = percent;
         hpText.text = cur.ToString();
+        bossNameText.text = EnemyController.Instance.curEnemy.enemyName;
     }
 
     void Move(GameObject go, Vector3 pos, float time)

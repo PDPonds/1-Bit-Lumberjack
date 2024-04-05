@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e4388a2d6de1d4582c9b8c6a6d9d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minCoinDrop: 8
-  maxCoinDrop: 15
+  minCoinDrop: 4
+  maxCoinDrop: 8
   coinPrefab: {fileID: 4148443425172950749, guid: cb9e7b573923eba49a005e103be3c3ca, type: 3}
   coinSpawnPoint: {fileID: 1186217932389887196}

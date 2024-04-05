@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de337007d376ed24cb3e498ce033aaf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: []
+  particles:
+  - name: TapParticle
+    prefab: {fileID: 8515796870038257121, guid: 5802c0d660627f147bc2390e61dd67fd, type: 3}
