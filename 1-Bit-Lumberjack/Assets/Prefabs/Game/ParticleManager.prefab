@@ -47,3 +47,5 @@ MonoBehaviour:
   particles:
   - name: TapParticle
     prefab: {fileID: 8515796870038257121, guid: 5802c0d660627f147bc2390e61dd67fd, type: 3}
+  - name: AttackParticle
+    prefab: {fileID: 310531633290116293, guid: 5c8243fd6bb49194998571aa880580cc, type: 3}

@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curGameState: 0
+  bossTime: 15
+  curBossTime: 0
   curCoin: 0
   maxStatePerPhase: 10
   curPhase: 1

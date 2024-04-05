@@ -21,6 +21,7 @@ public class EnemyController : Singleton<EnemyController>
 
     [Header("===== Visual =====")]
     [SerializeField] Transform enemyVisual;
+    [SerializeField] Transform spawnAttackParticle;
 
     private void OnEnable()
     {
@@ -95,7 +96,7 @@ public class EnemyController : Singleton<EnemyController>
     {
         curHP -= amount;
         anim.Play("EnemyTakeDamage");
-        ParticleManager.Instance.SpawnParticle("AttackParticle", transform.position);
+        ParticleManager.Instance.SpawnParticle("AttackParticle", spawnAttackParticle.position);
         OnEnemyTakeDamage?.Invoke();
         if (curHP <= 0)
         {
