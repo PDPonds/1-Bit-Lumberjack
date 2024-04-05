@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,10 +18,14 @@ public class GameManager : Singleton<GameManager>
     public event NextStateEvent OnNextState;
     public delegate void NextPhaseEvent();
     public event NextPhaseEvent OnNextPhase;
+    public delegate void ExitBossStateEvent();
+    public event ExitBossStateEvent OnExitBossState;
 
     [Header("===== Game State =====")]
     public GameState curGameState;
-
+    [Header("===== Boss =====")]
+    public float bossTime;
+    [HideInInspector] public float curBossTime;
     [Header("===== Coin =====")]
     public int curCoin;
 
@@ -62,8 +67,11 @@ public class GameManager : Singleton<GameManager>
         switch (curGameState)
         {
             case GameState.Normal:
+                UIManager.Instance.bossTimeBorder.SetActive(false);
                 break;
             case GameState.Boss:
+                UIManager.Instance.bossTimeBorder.SetActive(true);
+                curBossTime = bossTime;
                 break;
         }
     }
@@ -75,7 +83,18 @@ public class GameManager : Singleton<GameManager>
             case GameState.Normal:
                 break;
             case GameState.Boss:
+                DecreaseBossTime();
                 break;
+        }
+    }
+
+    void DecreaseBossTime()
+    {
+        curBossTime -= Time.deltaTime;
+        if (curBossTime < 0)
+        {
+            ResetPhaseAndState();
+            OnExitBossState?.Invoke();
         }
     }
 
@@ -128,6 +147,12 @@ public class GameManager : Singleton<GameManager>
         curPhase++;
         curState = 1;
         OnNextPhase?.Invoke();
+    }
+
+    public void ResetPhaseAndState()
+    {
+        SwitchState(GameState.Normal);
+        curState = 1;
     }
 
     #endregion

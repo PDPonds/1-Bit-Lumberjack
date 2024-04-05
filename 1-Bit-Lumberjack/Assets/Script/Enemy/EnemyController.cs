@@ -23,6 +23,7 @@ public class EnemyController : Singleton<EnemyController>
     private void OnEnable()
     {
         PlayerManager.Instance.OnPlayerAttack += TakeDamage;
+        GameManager.Instance.OnExitBossState += SetupEnemy;
     }
 
     private void Start()

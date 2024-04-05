@@ -15,6 +15,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Image hpFill;
     [SerializeField] TextMeshProUGUI hpText;
     [SerializeField] TextMeshProUGUI bossNameText;
+    public GameObject bossTimeBorder;
+    [SerializeField] Image bossTimeFill;
+    [SerializeField] TextMeshProUGUI bossTimeText;
     [Header("===== Phase =====")]
     [SerializeField] TextMeshProUGUI phaseText;
     [Header("===== State =====")]
@@ -38,6 +41,7 @@ public class UIManager : Singleton<UIManager>
         GameManager.Instance.OnNextPhase += UpdatePhase;
         EnemyController.Instance.OnEnemyTakeDamage += UpdateHP;
         EnemyController.Instance.OnEnemyDead += UpdateHP;
+        GameManager.Instance.OnExitBossState += UpdateState;
     }
 
     private void Awake()
@@ -58,6 +62,23 @@ public class UIManager : Singleton<UIManager>
         UpdatePhase();
         UpdateHP();
         UpdateDamage();
+    }
+
+    private void Update()
+    {
+        UpdateBossTime();
+    }
+
+    void UpdateBossTime()
+    {
+        if (bossTimeBorder.activeSelf)
+        {
+            float cur = GameManager.Instance.curBossTime;
+            float max = GameManager.Instance.bossTime;
+            float pecent = cur / max;
+            bossTimeFill.fillAmount = pecent;
+            bossTimeText.text = cur.ToString("N2");
+        }
     }
 
     void UpdateDamage()
