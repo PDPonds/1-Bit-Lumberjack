@@ -2,10 +2,134 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BirdBehavior
+{
+    MoveLeft, MoveRight, MoveExit
+}
+
 public class Bird : MonoBehaviour, ITouchObject
 {
+    public BirdBehavior birdBehavior;
+    [SerializeField] float moveSpeed;
+    [SerializeField] Transform giftSpawnPoint;
+    [SerializeField] GameObject giftBoxPrefab;
+    GiftBox curGiftBox;
+    BirdBehavior lastBehavior;
+    Transform exitPos;
     public void OnTouch()
     {
-        Debug.Log("Bird");
+        curGiftBox.SwitchState(BoxState.OnGround);
+        lastBehavior = birdBehavior;
+        if (lastBehavior == BirdBehavior.MoveLeft)
+        {
+            exitPos = BirdGenerator.Instance.spawnAndExitLeftPos;
+        }
+        else
+        {
+            exitPos = BirdGenerator.Instance.spawnAndExitRightPos;
+        }
+        SwitchBehavior(BirdBehavior.MoveExit);
     }
+
+    private void Update()
+    {
+        UpdateBehavior();
+    }
+
+    #region Bird Behavior
+    public void OnSpawn()
+    {
+        SpawnGiftBox();
+    }
+
+    public void SwitchBehavior(BirdBehavior behavior)
+    {
+        birdBehavior = behavior;
+        SpriteRenderer spriteRnd = GetComponent<SpriteRenderer>();
+        switch (birdBehavior)
+        {
+            case BirdBehavior.MoveLeft:
+
+                spriteRnd.flipX = true;
+
+                break;
+            case BirdBehavior.MoveRight:
+
+                spriteRnd.flipX = false;
+
+                break;
+            case BirdBehavior.MoveExit:
+
+                if (lastBehavior == BirdBehavior.MoveLeft)
+                {
+                    spriteRnd.flipX = true;
+                }
+                else if (lastBehavior == BirdBehavior.MoveRight)
+                {
+                    spriteRnd.flipX = false;
+                }
+
+                break;
+        }
+    }
+
+    void UpdateBehavior()
+    {
+        switch (birdBehavior)
+        {
+            case BirdBehavior.MoveLeft:
+
+                transform.position = Vector2.MoveTowards(transform.position,
+                    BirdGenerator.Instance.moveLeftPos.position,
+                    moveSpeed * Time.deltaTime);
+                float leftDis = Vector2.Distance(transform.position, BirdGenerator.Instance.moveLeftPos.position);
+                if (leftDis < 0.1f)
+                {
+                    SwitchBehavior(BirdBehavior.MoveRight);
+                }
+
+                break;
+            case BirdBehavior.MoveRight:
+
+                transform.position = Vector2.MoveTowards(transform.position,
+                    BirdGenerator.Instance.moveRightPos.position,
+                    moveSpeed * Time.deltaTime);
+
+                float rightDis = Vector2.Distance(transform.position, BirdGenerator.Instance.moveRightPos.position);
+                if (rightDis < 0.1f)
+                {
+                    SwitchBehavior(BirdBehavior.MoveLeft);
+                }
+
+                break;
+            case BirdBehavior.MoveExit:
+
+                transform.position = Vector2.MoveTowards(transform.position,
+                    exitPos.position, moveSpeed * Time.deltaTime);
+
+                float exitDis = Vector2.Distance(transform.position, exitPos.position);
+                if (exitDis < 0.1f)
+                {
+                    BirdGenerator.Instance.curBird = null;
+                    Destroy(gameObject);
+                }
+
+                break;
+        }
+    }
+
+    #endregion
+
+    #region GiftBox
+
+    void SpawnGiftBox()
+    {
+        GameObject box = Instantiate(giftBoxPrefab, giftSpawnPoint);
+        GiftBox giftBox = box.GetComponent<GiftBox>();
+        curGiftBox = giftBox;
+        giftBox.SwitchState(BoxState.OnBird);
+    }
+
+    #endregion
+
 }
