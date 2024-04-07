@@ -12,11 +12,34 @@ public class BirdGenerator : Singleton<BirdGenerator>
     public Transform spawnAndExitLeftPos;
     public Transform spawnAndExitRightPos;
 
+    [Header("===== Generate Setting =====")]
+    [SerializeField] float minSpawnBirdDelayTime;
+    [SerializeField] float maxSpawnBirdDelayTime;
+    float curDelayTime;
+
     [HideInInspector] public Bird curBird;
 
     private void Start()
     {
-        SpawnBird();
+        ResetDelayTime();
+    }
+
+    private void Update()
+    {
+        GenerateBird();
+    }
+
+    void GenerateBird()
+    {
+        if (curBird == null)
+        {
+            curDelayTime -= Time.deltaTime;
+            if (curDelayTime < 0)
+            {
+                SpawnBird();
+            }
+
+        }
     }
 
     public void SpawnBird()
@@ -35,6 +58,13 @@ public class BirdGenerator : Singleton<BirdGenerator>
             bird.SwitchBehavior(BirdBehavior.MoveLeft);
         }
 
+        curBird = bird;
+    }
+
+    public void ResetDelayTime()
+    {
+        float delayTime = Random.Range(minSpawnBirdDelayTime, maxSpawnBirdDelayTime);
+        curDelayTime = delayTime;
     }
 
     Transform RandomSpawnPos()

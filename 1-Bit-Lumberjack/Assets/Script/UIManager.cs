@@ -11,6 +11,9 @@ public class UIManager : Singleton<UIManager>
     [Header("===== Coin =====")]
     public Transform coinIcon;
     [SerializeField] TextMeshProUGUI coinText;
+    [Header("===== Mana =====")]
+    [SerializeField] Image manaFill;
+    [SerializeField] TextMeshProUGUI manaText;
     [Header("===== Boss =====")]
     [SerializeField] Image hpFill;
     [SerializeField] TextMeshProUGUI hpText;
@@ -43,6 +46,16 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] TextMeshProUGUI axeCostText;
     [SerializeField] TextMeshProUGUI axeMulDamageText;
     [SerializeField] Button upgradeAxeButton;
+    [Header("===== Upgrade Strike =====")]
+    [SerializeField] TextMeshProUGUI strikeLevelText;
+    [SerializeField] TextMeshProUGUI strikeDiscriptionText;
+    [SerializeField] TextMeshProUGUI strikeCostText;
+    [SerializeField] TextMeshProUGUI strikeMulDamageText;
+    [SerializeField] Button upgradeStrikeButton;
+    [SerializeField] Button strikeSkillButton;
+    [SerializeField] TextMeshProUGUI strikeManaCost;
+    [SerializeField] Image strikeSkillTimeFill;
+    [SerializeField] Image strikeSkillDelayFill;
 
     private void OnEnable()
     {
@@ -56,6 +69,21 @@ public class UIManager : Singleton<UIManager>
 
         GameManager.Instance.OnUpgradeAxe += UpdateDamage;
         GameManager.Instance.OnUpgradeAxe += UpdateAxeUpgrade;
+
+        GameManager.Instance.OnAddMana += UpdateMana;
+        GameManager.Instance.OnRemoveMana += UpdateMana;
+
+        #region Strike Skill
+        SkillManager.Instance.GetSkill("Strike").OnUpgradeSkill += UpdateStrikeSkill;
+        SkillManager.Instance.OnStrikeReady += () => strikeSkillTimeFill.gameObject.SetActive(false);
+        SkillManager.Instance.OnStrikeReady += () => strikeSkillDelayFill.gameObject.SetActive(false);
+
+        SkillManager.Instance.OnStrikeUse += () => strikeSkillTimeFill.gameObject.SetActive(true);
+
+        SkillManager.Instance.OnStrikeDelay += () => strikeSkillTimeFill.gameObject.SetActive(false);
+        SkillManager.Instance.OnStrikeDelay += () => strikeSkillDelayFill.gameObject.SetActive(true);
+        #endregion
+
     }
 
     private void Awake()
@@ -71,6 +99,11 @@ public class UIManager : Singleton<UIManager>
         closeSettingButton.onClick.AddListener(CloseSetting);
 
         upgradeAxeButton.onClick.AddListener(UpgradeAxeBut);
+
+        upgradeStrikeButton.onClick.AddListener(UpgradeStrikeSkill);
+        strikeSkillButton.onClick.AddListener(UseStrikeSkill);
+
+
     }
 
     private void Start()
@@ -80,13 +113,28 @@ public class UIManager : Singleton<UIManager>
         UpdatePhase();
         UpdateHP();
         UpdateDamage();
+        UpdateMana();
     }
 
     private void Update()
     {
         UpdateBossTime();
         DisableUpgradeAxe();
+        DisableUpgradeStrikeSkill();
     }
+
+    #region Mana
+
+    void UpdateMana()
+    {
+        float max = GameManager.Instance.maxMana;
+        float cur = GameManager.Instance.curMana;
+        float percent = cur / max;
+        manaFill.fillAmount = percent;
+        manaText.text = $"{cur.ToString("N1")} / {max.ToString("N1")}";
+    }
+
+    #endregion
 
     #region Upgrade Axe
 
@@ -107,8 +155,74 @@ public class UIManager : Singleton<UIManager>
     {
         if (GameManager.Instance.CheckCoin(GameManager.Instance.CalUpgradeAxeCost()))
             upgradeAxeButton.interactable = true;
-        else 
+        else
             upgradeAxeButton.interactable = false;
+    }
+
+    #endregion
+
+    #region Upgrade Strike
+
+    void UpdateStrikeSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Strike");
+        strikeLevelText.text = $"Lv. {SkillManager.Instance.GetSkillLevel(skill)}";
+        strikeDiscriptionText.text = $"{SkillManager.Instance.GetSkillDiscription(skill)} {SkillManager.Instance.GetValue(skill).ToString("N2")}%";
+        strikeCostText.text = $"{SkillManager.Instance.GetCostToUpgrade(skill)}";
+        strikeMulDamageText.text = $"Damage : {SkillManager.Instance.GetMulValue(skill)}";
+        strikeManaCost.text = $"{SkillManager.Instance.GetSkillMana(skill)}";
+    }
+
+    void UpgradeStrikeSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Strike");
+        SkillManager.Instance.UpgradeSkill(skill);
+    }
+
+    void DisableUpgradeStrikeSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Strike");
+        if (SkillManager.Instance.GetCanUpgrade(skill))
+            upgradeStrikeButton.interactable = true;
+        else
+            upgradeStrikeButton.interactable = false;
+
+        if (SkillManager.Instance.HasSkill(skill))
+        {
+            strikeSkillButton.gameObject.SetActive(true);
+            switch (SkillManager.Instance.strikeSkillState)
+            {
+                case SkillState.Ready:
+                    strikeSkillDelayFill.fillAmount = 1;
+                    strikeSkillTimeFill.fillAmount = 1;
+
+                    if (SkillManager.Instance.GetCanUse(skill))
+                        strikeSkillDelayFill.gameObject.SetActive(false);
+                    else
+                        strikeSkillDelayFill.gameObject.SetActive(true);
+                    break;
+                case SkillState.Use:
+                    float curTime = SkillManager.Instance.curStrikeTime;
+                    float maxTime = skill.useTime;
+                    float timePercent = curTime / maxTime;
+                    strikeSkillTimeFill.fillAmount = timePercent;
+                    break;
+                case SkillState.Delay:
+                    float curDelay = SkillManager.Instance.curStrikeDelay;
+                    float maxDelay = skill.delayTime;
+                    float delayPercent = curDelay / maxDelay;
+                    strikeSkillDelayFill.fillAmount = delayPercent;
+                    break;
+            }
+        }
+        else
+            strikeSkillButton.gameObject.SetActive(false);
+
+    }
+
+    void UseStrikeSkill()
+    {
+        SkillManager.Instance.UseStrikeSkill();
     }
 
     #endregion
@@ -233,6 +347,7 @@ public class UIManager : Singleton<UIManager>
     {
         Show(axeBorder);
         UpdateAxeUpgrade();
+        UpdateStrikeSkill();
     }
 
     void ShowUpgradeTeam()

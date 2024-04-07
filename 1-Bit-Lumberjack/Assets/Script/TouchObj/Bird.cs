@@ -37,6 +37,7 @@ public class Bird : MonoBehaviour, ITouchObject
     }
 
     #region Bird Behavior
+
     public void OnSpawn()
     {
         SpawnGiftBox();
@@ -110,6 +111,7 @@ public class Bird : MonoBehaviour, ITouchObject
                 float exitDis = Vector2.Distance(transform.position, exitPos.position);
                 if (exitDis < 0.1f)
                 {
+                    BirdGenerator.Instance.ResetDelayTime();
                     BirdGenerator.Instance.curBird = null;
                     Destroy(gameObject);
                 }

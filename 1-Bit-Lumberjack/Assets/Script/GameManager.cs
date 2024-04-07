@@ -28,6 +28,12 @@ public class GameManager : Singleton<GameManager>
     public delegate void UpgradeAxeEvent();
     public event UpgradeAxeEvent OnUpgradeAxe;
 
+    public delegate void AddManaEvent();
+    public event AddManaEvent OnAddMana;
+
+    public delegate void RemoveManaEvent();
+    public event RemoveManaEvent OnRemoveMana;
+
     [Header("===== Game State =====")]
     public GameState curGameState;
     [Header("===== Boss =====")]
@@ -43,6 +49,10 @@ public class GameManager : Singleton<GameManager>
     public int maxStatePerPhase;
     [HideInInspector] public int curPhase = 1;
     [HideInInspector] public int curState = 1;
+    [Header("===== Mana =====")]
+    public float maxMana;
+    public float curMana;
+    public float mulToAddMana;
 
     [Header("===== Axe Damage =====")]
     public int curLevelAxe = 1;
@@ -56,6 +66,7 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         EnemyController.Instance.OnEnemyDead += NextState;
+        EnemyController.Instance.OnEnemyTakeDamage += AddMana;
     }
 
     private void Start()
@@ -173,6 +184,31 @@ public class GameManager : Singleton<GameManager>
     {
         SwitchState(GameState.Normal);
         curState = 1;
+    }
+
+    #endregion
+
+    #region Mana
+
+    void AddMana()
+    {
+        curMana += mulToAddMana;
+        if (curMana >= maxMana) curMana = maxMana;
+        OnAddMana?.Invoke();
+    }
+
+    public void RemoveMana(float amount)
+    {
+        if (CheckMana(amount))
+        {
+            curMana -= amount;
+            OnRemoveMana?.Invoke();
+        }
+    }
+
+    public bool CheckMana(float amount)
+    {
+        return curMana >= amount;
     }
 
     #endregion

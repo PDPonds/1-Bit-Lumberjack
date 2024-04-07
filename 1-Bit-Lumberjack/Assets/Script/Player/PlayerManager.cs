@@ -37,8 +37,19 @@ public class PlayerManager : Singleton<PlayerManager>
 
     void Attack()
     {
-        OnPlayerAttack?.Invoke(curAttackDamage);
-        TextGenerator.Instance.GenerateText(curAttackDamage);
+        if (SkillManager.Instance.CheckStrikeState(SkillState.Use))
+        {
+            Skill strikeSkill = SkillManager.Instance.GetSkill("Strike");
+            float strikeDmg = curAttackDamage * (SkillManager.Instance.GetValue(strikeSkill) / 100f);
+            int dmg = curAttackDamage + (int)strikeDmg;
+            OnPlayerAttack?.Invoke(dmg);
+            TextGenerator.Instance.GenerateText(dmg);
+        }
+        else
+        {
+            OnPlayerAttack?.Invoke(curAttackDamage);
+            TextGenerator.Instance.GenerateText(curAttackDamage);
+        }
         anim.Play("Player_Attack");
     }
 

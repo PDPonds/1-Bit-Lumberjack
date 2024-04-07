@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19a67db02141f44184bddce75d6fc1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textObj: {fileID: 1013754436167340520, guid: 74840e076a3760542b50f4cbd61ee4a2, type: 3}
+  textParent: {fileID: 0}
+  moveY: 300
