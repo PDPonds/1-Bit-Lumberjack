@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum BoxState
 {
-    OnBird, OnGround
+    OnBird, OnGround, OpenAready
 }
 
 public class GiftBox : MonoBehaviour, ITouchObject
@@ -14,23 +14,31 @@ public class GiftBox : MonoBehaviour, ITouchObject
 
     public BoxState boxState;
 
+    public float autoOpenTime;
+    float curOpenTime;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        UpdateState();
+    }
 
     public void OnTouch()
     {
         if (IsState(BoxState.OnGround))
         {
-            anim.SetBool("isOpen", true);
             CoinGenerator.Instance.SpawnAndSetupCoin(RandomCoinAmount(), transform.position);
+            SwitchState(BoxState.OpenAready);
         }
     }
 
     #region State
+
     public void SwitchState(BoxState state)
     {
         boxState = state;
@@ -44,6 +52,10 @@ public class GiftBox : MonoBehaviour, ITouchObject
             case BoxState.OnGround:
                 rb.bodyType = RigidbodyType2D.Dynamic;
                 rb.simulated = true;
+                curOpenTime = autoOpenTime;
+                break;
+            case BoxState.OpenAready:
+                anim.SetBool("isOpen", true);
                 break;
         }
     }
@@ -52,14 +64,41 @@ public class GiftBox : MonoBehaviour, ITouchObject
     {
         return boxState == state;
     }
+
+    void UpdateState()
+    {
+        switch (boxState)
+        {
+            case BoxState.OnBird:
+
+                break;
+            case BoxState.OnGround:
+
+                curOpenTime -= Time.deltaTime;
+                if(curOpenTime <= 0)
+                {
+                    CoinGenerator.Instance.SpawnAndSetupCoin(RandomCoinAmount(), transform.position);
+                    SwitchState(BoxState.OpenAready);
+                }
+
+                break;
+            case BoxState.OpenAready:
+
+                Destroy(gameObject, 1f);
+
+                break;
+        }
+
+    }
+
     #endregion
 
     #region Gift Box
 
     int RandomCoinAmount()
     {
-        float min = GameManager.Instance.minBirdGiftDropCoinPercentage;
-        float max = GameManager.Instance.maxBirdGiftDropCoinPercentage;
+        float min = GameManager.Instance.minBirdDropPercent;
+        float max = GameManager.Instance.maxBirdDropPercent;
 
         float percent = Random.Range(min, max);
         float drop = (GameManager.Instance.curPhase * 100) * percent;

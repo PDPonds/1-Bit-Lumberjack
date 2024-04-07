@@ -36,8 +36,8 @@ public class GameManager : Singleton<GameManager>
     [Header("===== Coin =====")]
     public int curCoin;
     [Header("===== Bird Gift =====")]
-    [Range(0f, 1f)] public float minBirdGiftDropCoinPercentage;
-    [Range(0f, 1f)] public float maxBirdGiftDropCoinPercentage;
+    [Range(0f, 1f)] public float minBirdDropPercent;
+    [Range(0f, 1f)] public float maxBirdDropPercent;
 
     [Header("===== Phase And State =====")]
     public int maxStatePerPhase;

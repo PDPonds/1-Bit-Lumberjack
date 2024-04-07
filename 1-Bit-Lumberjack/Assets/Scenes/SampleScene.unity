@@ -14098,6 +14098,14 @@ PrefabInstance:
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: maxBirdDropPercent
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: minBirdDropPercent
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
       propertyPath: startCostUpgradeAxe
       value: 10
       objectReference: {fileID: 0}
@@ -14124,6 +14132,14 @@ PrefabInstance:
     - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
       propertyPath: minMulDamagePerLevel
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: maxBirdGiftDropCoinPercentage
+      value: 0.428
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632666338259527691, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
+      propertyPath: minBirdGiftDropCoinPercentage
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 8583048967180419868, guid: f7d40cf30c7e23f488c70126ae025edb, type: 3}
       propertyPath: m_Name

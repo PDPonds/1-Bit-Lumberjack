@@ -193,3 +193,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7feae698e26819b419ab780072448a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxState: 0
+  autoOpenTime: 3
