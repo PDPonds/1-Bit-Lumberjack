@@ -13,7 +13,7 @@ public class CoinGenerator : Singleton<CoinGenerator>
 
     private void OnEnable()
     {
-        EnemyController.Instance.OnEnemyDead += GenerateCoin;
+        EnemyController.Instance.OnEnemyDead += GenerateCoinOnEnemyDead;
     }
 
     public void SpawnAndSetupCoin(int amount)
@@ -68,9 +68,26 @@ public class CoinGenerator : Singleton<CoinGenerator>
         return (int)drop;
     }
 
-    void GenerateCoin()
+    void GenerateCoinOnEnemyDead()
     {
-        SpawnAndSetupCoin(CalDropCoinAmount());
+        if (SkillManager.Instance.CheckLootingState(SkillState.Use))
+        {
+            Skill lootingSkill = SkillManager.Instance.GetSkill("Looting");
+            int dropFormEnemy = CalDropCoinAmount();
+            float dropFormLooting = CalDropCoinAmount() * (SkillManager.Instance.GetValue(lootingSkill) / 100f);
+            int result = dropFormEnemy + (int)dropFormLooting;
+            SpawnAndSetupCoin(result);
+
+            Debug.Log("Enemy" + dropFormEnemy);
+            Debug.Log("Looting" + dropFormLooting);
+            Debug.Log("Result" + result);
+        }
+        else
+        {
+            int drop = CalDropCoinAmount();
+            SpawnAndSetupCoin(drop);
+            Debug.Log(drop);
+        }
     }
 
 }

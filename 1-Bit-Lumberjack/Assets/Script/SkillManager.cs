@@ -11,6 +11,7 @@ public enum SkillState
 
 public class SkillManager : Singleton<SkillManager>
 {
+    #region Strike Delegate And Event
     public delegate void StrikeReadyEvent();
     public event StrikeReadyEvent OnStrikeReady;
 
@@ -19,19 +20,38 @@ public class SkillManager : Singleton<SkillManager>
 
     public delegate void StrikeDelayEvent();
     public event StrikeDelayEvent OnStrikeDelay;
+    #endregion
+
+    #region Looting Delegate And Event
+    public delegate void LootingReadyEvent();
+    public event LootingReadyEvent OnLootingReady;
+
+    public delegate void LootingUseEvent();
+    public event LootingUseEvent OnLootingUse;
+
+    public delegate void LootingDelayEvent();
+    public event LootingDelayEvent OnLootingDelay;
+    #endregion
 
     public Skill[] skills;
 
+    [Header("===== Strike =====")]
     public SkillState strikeSkillState;
     [HideInInspector] public float curStrikeDelay;
     [HideInInspector] public float curStrikeTime;
+    [Header("===== Looting =====")]
+    public SkillState lootingSkillState;
+    [HideInInspector] public float curLootingDelay;
+    [HideInInspector] public float curLootingTime;
 
     private void Update()
     {
         UpdateStrikeState();
+        UpdateLootingState();
     }
 
     #region State Strike Skill
+
     void SwitchSkrikeState(SkillState state)
     {
         strikeSkillState = state;
@@ -94,16 +114,76 @@ public class SkillManager : Singleton<SkillManager>
 
     #endregion
 
+    #region State Looting Skill
+
+    void SwitchLootingState(SkillState state)
+    {
+        lootingSkillState = state;
+        Skill skill = GetSkill("Looting");
+        switch (lootingSkillState)
+        {
+            case SkillState.Ready:
+                OnLootingReady?.Invoke();
+                break;
+            case SkillState.Use:
+                OnLootingUse?.Invoke();
+                curLootingTime = skill.useTime;
+                break;
+            case SkillState.Delay:
+                OnLootingDelay?.Invoke();
+                curLootingDelay = skill.delayTime;
+                break;
+        }
+    }
+
+    void UpdateLootingState()
+    {
+        switch (lootingSkillState)
+        {
+            case SkillState.Ready:
+                break;
+            case SkillState.Use:
+
+                curLootingTime -= Time.deltaTime;
+                if (curLootingTime < 0)
+                {
+                    SwitchLootingState(SkillState.Delay);
+                }
+
+                break;
+            case SkillState.Delay:
+                curLootingDelay -= Time.deltaTime;
+                if (curLootingDelay < 0)
+                {
+                    SwitchLootingState(SkillState.Ready);
+                }
+                break;
+        }
+    }
+
+    public bool CheckLootingState(SkillState state)
+    {
+        return lootingSkillState == state;
+    }
+
+    public void UseLootingSkill()
+    {
+        Skill skill = GetSkill("Looting");
+        if (CheckLootingState(SkillState.Ready) && GetCanUse(skill))
+        {
+            GameManager.Instance.RemoveMana(GetSkillMana(skill));
+            SwitchLootingState(SkillState.Use);
+        }
+    }
+
+    #endregion
+
+    #region Function
     public Skill GetSkill(string name)
     {
         Skill skill = Array.Find(skills, skill => skill.skillName == name);
         if (skill == null) return null;
         return skill;
-    }
-
-    public string GetSkillName(Skill skill)
-    {
-        return skill.skillName;
     }
 
     public string GetSkillDiscription(Skill skill)
@@ -114,11 +194,6 @@ public class SkillManager : Singleton<SkillManager>
     public int GetSkillLevel(Skill skill)
     {
         return skill.curLevel;
-    }
-
-    public float GetSkillValue(Skill skill)
-    {
-        return skill.GetValue();
     }
 
     public float GetSkillMana(Skill skill)
@@ -160,6 +235,9 @@ public class SkillManager : Singleton<SkillManager>
     {
         return skill.HasSkill();
     }
+
+    #endregion
+
 
 }
 

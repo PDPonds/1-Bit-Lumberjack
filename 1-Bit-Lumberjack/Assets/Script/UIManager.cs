@@ -56,6 +56,17 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] TextMeshProUGUI strikeManaCost;
     [SerializeField] Image strikeSkillTimeFill;
     [SerializeField] Image strikeSkillDelayFill;
+    [Header("===== Upgrade Looting =====")]
+    [SerializeField] TextMeshProUGUI lootingLevelText;
+    [SerializeField] TextMeshProUGUI lootingDiscriptionText;
+    [SerializeField] TextMeshProUGUI lootingCostText;
+    [SerializeField] TextMeshProUGUI lootingMulDamageText;
+    [SerializeField] Button upgradeLootingButton;
+    [SerializeField] Button lootingSkillButton;
+    [SerializeField] TextMeshProUGUI lootingManaCost;
+    [SerializeField] Image lootingSkillTimeFill;
+    [SerializeField] Image lootingSkillDelayFill;
+
 
     private void OnEnable()
     {
@@ -84,6 +95,18 @@ public class UIManager : Singleton<UIManager>
         SkillManager.Instance.OnStrikeDelay += () => strikeSkillDelayFill.gameObject.SetActive(true);
         #endregion
 
+        #region Looting Skill
+        SkillManager.Instance.GetSkill("Looting").OnUpgradeSkill += UpdateLootingSkill;
+        SkillManager.Instance.OnLootingReady += () => lootingSkillTimeFill.gameObject.SetActive(false);
+        SkillManager.Instance.OnLootingReady += () => lootingSkillDelayFill.gameObject.SetActive(false);
+
+        SkillManager.Instance.OnLootingUse += () => lootingSkillTimeFill.gameObject.SetActive(true);
+
+        SkillManager.Instance.OnLootingDelay += () => lootingSkillTimeFill.gameObject.SetActive(false);
+        SkillManager.Instance.OnLootingDelay += () => lootingSkillDelayFill.gameObject.SetActive(true);
+        #endregion
+
+
     }
 
     private void Awake()
@@ -103,7 +126,8 @@ public class UIManager : Singleton<UIManager>
         upgradeStrikeButton.onClick.AddListener(UpgradeStrikeSkill);
         strikeSkillButton.onClick.AddListener(UseStrikeSkill);
 
-
+        upgradeLootingButton.onClick.AddListener(UpgradeLootingSkill);
+        lootingSkillButton.onClick.AddListener(UseLootingSkill);
     }
 
     private void Start()
@@ -121,6 +145,7 @@ public class UIManager : Singleton<UIManager>
         UpdateBossTime();
         DisableUpgradeAxe();
         DisableUpgradeStrikeSkill();
+        DisableUpgradeLootingSkill();
     }
 
     #region Mana
@@ -223,6 +248,72 @@ public class UIManager : Singleton<UIManager>
     void UseStrikeSkill()
     {
         SkillManager.Instance.UseStrikeSkill();
+    }
+
+    #endregion
+
+    #region Upgrade Looting
+
+    void UpdateLootingSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Looting");
+        lootingLevelText.text = $"Lv. {SkillManager.Instance.GetSkillLevel(skill)}";
+        lootingDiscriptionText.text = $"{SkillManager.Instance.GetSkillDiscription(skill)} {SkillManager.Instance.GetValue(skill).ToString("N2")}%";
+        lootingCostText.text = $"{SkillManager.Instance.GetCostToUpgrade(skill)}";
+        lootingMulDamageText.text = $"Damage : {SkillManager.Instance.GetMulValue(skill)}";
+        lootingManaCost.text = $"{SkillManager.Instance.GetSkillMana(skill)}";
+    }
+
+    void UpgradeLootingSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Looting");
+        SkillManager.Instance.UpgradeSkill(skill);
+    }
+
+    void DisableUpgradeLootingSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Looting");
+        if (SkillManager.Instance.GetCanUpgrade(skill))
+            upgradeLootingButton.interactable = true;
+        else
+            upgradeLootingButton.interactable = false;
+
+        if (SkillManager.Instance.HasSkill(skill))
+        {
+            lootingSkillButton.gameObject.SetActive(true);
+            switch (SkillManager.Instance.lootingSkillState)
+            {
+                case SkillState.Ready:
+                    lootingSkillDelayFill.fillAmount = 1;
+                    lootingSkillTimeFill.fillAmount = 1;
+
+                    if (SkillManager.Instance.GetCanUse(skill))
+                        lootingSkillDelayFill.gameObject.SetActive(false);
+                    else
+                        lootingSkillDelayFill.gameObject.SetActive(true);
+                    break;
+                case SkillState.Use:
+                    float curTime = SkillManager.Instance.curLootingTime;
+                    float maxTime = skill.useTime;
+                    float timePercent = curTime / maxTime;
+                    lootingSkillTimeFill.fillAmount = timePercent;
+                    break;
+                case SkillState.Delay:
+                    float curDelay = SkillManager.Instance.curLootingDelay;
+                    float maxDelay = skill.delayTime;
+                    float delayPercent = curDelay / maxDelay;
+                    lootingSkillDelayFill.fillAmount = delayPercent;
+                    break;
+            }
+        }
+        else
+            lootingSkillButton.gameObject.SetActive(false);
+
+    }
+
+    void UseLootingSkill()
+    {
+        SkillManager.Instance.UseLootingSkill();
     }
 
     #endregion
