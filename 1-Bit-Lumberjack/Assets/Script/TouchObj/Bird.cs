@@ -44,6 +44,7 @@ public class Bird : MonoBehaviour, ITouchObject
     public void OnSpawn()
     {
         SpawnGiftBox();
+        curBirdGoBackTime = BirdGenerator.Instance.birdGoBackTime;
     }
 
     public void SwitchBehavior(BirdBehavior behavior)
@@ -55,13 +56,11 @@ public class Bird : MonoBehaviour, ITouchObject
             case BirdBehavior.MoveLeft:
 
                 spriteRnd.flipX = true;
-                curBirdGoBackTime = BirdGenerator.Instance.birdGoBackTime;
 
                 break;
             case BirdBehavior.MoveRight:
 
                 spriteRnd.flipX = false;
-                curBirdGoBackTime = BirdGenerator.Instance.birdGoBackTime;
 
                 break;
             case BirdBehavior.MoveExit:
