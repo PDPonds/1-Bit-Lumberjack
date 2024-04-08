@@ -16,6 +16,9 @@ public class Bird : MonoBehaviour, ITouchObject
     GiftBox curGiftBox;
     BirdBehavior lastBehavior;
     Transform exitPos;
+
+    float curBirdGoBackTime;
+
     public void OnTouch()
     {
         curGiftBox.SwitchState(BoxState.OnGround);
@@ -52,11 +55,13 @@ public class Bird : MonoBehaviour, ITouchObject
             case BirdBehavior.MoveLeft:
 
                 spriteRnd.flipX = true;
+                curBirdGoBackTime = BirdGenerator.Instance.birdGoBackTime;
 
                 break;
             case BirdBehavior.MoveRight:
 
                 spriteRnd.flipX = false;
+                curBirdGoBackTime = BirdGenerator.Instance.birdGoBackTime;
 
                 break;
             case BirdBehavior.MoveExit:
@@ -89,6 +94,8 @@ public class Bird : MonoBehaviour, ITouchObject
                     SwitchBehavior(BirdBehavior.MoveRight);
                 }
 
+                AutoResetBird();
+
                 break;
             case BirdBehavior.MoveRight:
 
@@ -101,6 +108,8 @@ public class Bird : MonoBehaviour, ITouchObject
                 {
                     SwitchBehavior(BirdBehavior.MoveLeft);
                 }
+
+                AutoResetBird();
 
                 break;
             case BirdBehavior.MoveExit:
@@ -117,6 +126,24 @@ public class Bird : MonoBehaviour, ITouchObject
                 }
 
                 break;
+        }
+    }
+
+    void AutoResetBird()
+    {
+        curBirdGoBackTime -= Time.deltaTime;
+        if (curBirdGoBackTime < 0)
+        {
+            lastBehavior = birdBehavior;
+            if (lastBehavior == BirdBehavior.MoveLeft)
+            {
+                exitPos = BirdGenerator.Instance.spawnAndExitLeftPos;
+            }
+            else
+            {
+                exitPos = BirdGenerator.Instance.spawnAndExitRightPos;
+            }
+            SwitchBehavior(BirdBehavior.MoveExit);
         }
     }
 

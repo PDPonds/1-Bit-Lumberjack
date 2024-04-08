@@ -17,6 +17,8 @@ public class BirdGenerator : Singleton<BirdGenerator>
     [SerializeField] float maxSpawnBirdDelayTime;
     float curDelayTime;
 
+    [Header("===== Bird =====")]
+    public float birdGoBackTime;
     [HideInInspector] public Bird curBird;
 
     private void Start()
