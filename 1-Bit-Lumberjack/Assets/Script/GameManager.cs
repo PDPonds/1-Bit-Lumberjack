@@ -34,28 +34,41 @@ public class GameManager : Singleton<GameManager>
     public delegate void RemoveManaEvent();
     public event RemoveManaEvent OnRemoveMana;
 
+    #region Static Variable
+    //Finish
+    public static int curCoin = 0;
+    public static float curMana = 0;
+    public static int curPhase = 1;
+    public static int curState = 1;
+    public static int curLevelAxe = 1;
+    public static int curStrikeLevel = 0;
+    public static int curLootingLevel = 0;
+
+    //Waiting
+    public static int curTeamworkLevel = 0;
+    public static int curLumberjackLevel = 0;
+    public static int curWoodpeckerLevel = 0;
+
+    #endregion
+
     [Header("===== Game State =====")]
     public GameState curGameState;
     [Header("===== Boss =====")]
     public float bossTime;
     [HideInInspector] public float curBossTime;
-    [Header("===== Coin =====")]
-    public int curCoin;
+
     [Header("===== Bird Gift =====")]
     [Range(0f, 1f)] public float minBirdDropPercent;
     [Range(0f, 1f)] public float maxBirdDropPercent;
 
     [Header("===== Phase And State =====")]
     public int maxStatePerPhase;
-    [HideInInspector] public int curPhase = 1;
-    [HideInInspector] public int curState = 1;
+
     [Header("===== Mana =====")]
     public float maxMana;
-    public float curMana;
     public float mulToAddMana;
 
     [Header("===== Axe Damage =====")]
-    public int curLevelAxe = 1;
     [SerializeField] int startAxeDamage;
     [SerializeField] int startCostUpgradeAxe;
     [Header("- MulCost")]
@@ -69,10 +82,14 @@ public class GameManager : Singleton<GameManager>
         EnemyController.Instance.OnEnemyTakeDamage += AddMana;
     }
 
+    private void Awake()
+    {
+        SaveSystem.Load();
+    }
+
     private void Start()
     {
-        curState = 1;
-        curPhase = 1;
+        SetupSkillLevel();
     }
 
     private void Update()
@@ -240,5 +257,27 @@ public class GameManager : Singleton<GameManager>
 
     #endregion
 
+    #region Skill
+    void SetupSkillLevel()
+    {
+        Skill strike = SkillManager.Instance.GetSkill("Strike");
+        Skill looting = SkillManager.Instance.GetSkill("Looting");
+        for (int i = 0; i < SkillManager.Instance.skills.Length; i++)
+        {
+            if (SkillManager.Instance.skills[i] == strike)
+                SkillManager.Instance.skills[i].curLevel = curStrikeLevel;
+
+            if (SkillManager.Instance.skills[i] == looting)
+                SkillManager.Instance.skills[i].curLevel = curLootingLevel;
+        }
+    }
+
+    #endregion
+
+    #region Teammate
+
+
+
+    #endregion
 
 }

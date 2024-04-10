@@ -101,7 +101,7 @@ public class GiftBox : MonoBehaviour, ITouchObject
         float max = GameManager.Instance.maxBirdDropPercent;
 
         float percent = Random.Range(min, max);
-        float drop = (GameManager.Instance.curPhase * 100) * percent;
+        float drop = (GameManager.curPhase * 100) * percent;
         return (int)drop;
     }
 

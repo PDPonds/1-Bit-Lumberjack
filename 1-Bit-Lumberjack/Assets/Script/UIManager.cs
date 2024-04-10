@@ -86,24 +86,24 @@ public class UIManager : Singleton<UIManager>
 
         #region Strike Skill
         SkillManager.Instance.GetSkill("Strike").OnUpgradeSkill += UpdateStrikeSkill;
-        SkillManager.Instance.OnStrikeReady += () => strikeSkillTimeFill.gameObject.SetActive(false);
-        SkillManager.Instance.OnStrikeReady += () => strikeSkillDelayFill.gameObject.SetActive(false);
+        SkillManager.Instance.OnStrikeReady += () => CloseGO(strikeSkillTimeFill.gameObject);
+        SkillManager.Instance.OnStrikeReady += () => CloseGO(strikeSkillDelayFill.gameObject);
 
-        SkillManager.Instance.OnStrikeUse += () => strikeSkillTimeFill.gameObject.SetActive(true);
+        SkillManager.Instance.OnStrikeUse += () => ShowGO(strikeSkillTimeFill.gameObject);
 
-        SkillManager.Instance.OnStrikeDelay += () => strikeSkillTimeFill.gameObject.SetActive(false);
-        SkillManager.Instance.OnStrikeDelay += () => strikeSkillDelayFill.gameObject.SetActive(true);
+        SkillManager.Instance.OnStrikeDelay += () => CloseGO(strikeSkillTimeFill.gameObject);
+        SkillManager.Instance.OnStrikeDelay += () => ShowGO(strikeSkillDelayFill.gameObject);
         #endregion
 
         #region Looting Skill
         SkillManager.Instance.GetSkill("Looting").OnUpgradeSkill += UpdateLootingSkill;
-        SkillManager.Instance.OnLootingReady += () => lootingSkillTimeFill.gameObject.SetActive(false);
-        SkillManager.Instance.OnLootingReady += () => lootingSkillDelayFill.gameObject.SetActive(false);
+        SkillManager.Instance.OnLootingReady += () => CloseGO(lootingSkillTimeFill.gameObject);
+        SkillManager.Instance.OnLootingReady += () => CloseGO(lootingSkillDelayFill.gameObject);
 
-        SkillManager.Instance.OnLootingUse += () => lootingSkillTimeFill.gameObject.SetActive(true);
+        SkillManager.Instance.OnLootingUse += () => ShowGO(lootingSkillTimeFill.gameObject);
 
-        SkillManager.Instance.OnLootingDelay += () => lootingSkillTimeFill.gameObject.SetActive(false);
-        SkillManager.Instance.OnLootingDelay += () => lootingSkillDelayFill.gameObject.SetActive(true);
+        SkillManager.Instance.OnLootingDelay += () => CloseGO(lootingSkillTimeFill.gameObject);
+        SkillManager.Instance.OnLootingDelay += () => ShowGO(lootingSkillDelayFill.gameObject);
         #endregion
 
 
@@ -153,7 +153,7 @@ public class UIManager : Singleton<UIManager>
     void UpdateMana()
     {
         float max = GameManager.Instance.maxMana;
-        float cur = GameManager.Instance.curMana;
+        float cur = GameManager.curMana;
         float percent = cur / max;
         manaFill.fillAmount = percent;
         manaText.text = $"{cur.ToString("N1")} / {max.ToString("N1")}";
@@ -165,7 +165,7 @@ public class UIManager : Singleton<UIManager>
 
     void UpdateAxeUpgrade()
     {
-        axeLevelText.text = $"Lv. {GameManager.Instance.curLevelAxe}";
+        axeLevelText.text = $"Lv. {GameManager.curLevelAxe}";
         axeDamageText.text = $"Damage : {GameManager.Instance.CalAxeDamage()}";
         axeCostText.text = $"{GameManager.Instance.CalUpgradeAxeCost()}";
         axeMulDamageText.text = $"Attack +{GameManager.Instance.mulDamagePerLevel}";
@@ -340,18 +340,18 @@ public class UIManager : Singleton<UIManager>
 
     void UpdateCoin()
     {
-        coinText.text = GameManager.Instance.curCoin.ToString();
+        coinText.text = GameManager.curCoin.ToString();
     }
 
     void UpdatePhase()
     {
-        phaseText.text = GameManager.Instance.curPhase.ToString();
+        phaseText.text = GameManager.curPhase.ToString();
     }
 
     void UpdateState()
     {
         stateText.text =
-            $"{GameManager.Instance.curState} / " +
+            $"{GameManager.curState} / " +
             $"{GameManager.Instance.maxStatePerPhase}";
     }
 
@@ -394,7 +394,7 @@ public class UIManager : Singleton<UIManager>
             .setOnComplete(() => finish());
     }
 
-    void Show(GameObject go)
+    void ShowTabUI(GameObject go)
     {
         CloseMenuAll();
         go.SetActive(true);
@@ -402,6 +402,17 @@ public class UIManager : Singleton<UIManager>
         Move(teamBorder, new Vector3(0, 0, 0), 0.5f);
         Move(achievementBorder, new Vector3(0, 0, 0), 0.5f);
     }
+
+    void ShowGO(GameObject go)
+    {
+        go.SetActive(true);
+    }
+
+    void CloseGO(GameObject go)
+    {
+        go.SetActive(false);
+    }
+
     #endregion
 
     #region Button
@@ -436,19 +447,19 @@ public class UIManager : Singleton<UIManager>
 
     void ShowUpgradeAxe()
     {
-        Show(axeBorder);
+        ShowTabUI(axeBorder);
         UpdateAxeUpgrade();
         UpdateStrikeSkill();
     }
 
     void ShowUpgradeTeam()
     {
-        Show(teamBorder);
+        ShowTabUI(teamBorder);
     }
 
     void ShowGetAchievement()
     {
-        Show(achievementBorder);
+        ShowTabUI(achievementBorder);
     }
 
     #endregion

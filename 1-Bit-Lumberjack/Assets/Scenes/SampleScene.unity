@@ -14690,6 +14690,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
+      propertyPath: skills.Array.data[0].curLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
       propertyPath: skills.Array.data[1].manaCost
       value: 40
       objectReference: {fileID: 0}

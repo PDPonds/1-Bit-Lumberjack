@@ -44,7 +44,7 @@ public class EnemyController : Singleton<EnemyController>
         int enemyIndex = 0;
         SpriteRenderer enemySpriteRen = enemyVisual.GetComponent<SpriteRenderer>();
 
-        if (GameManager.Instance.curState == GameManager.Instance.maxStatePerPhase - 1)
+        if (GameManager.curState == GameManager.Instance.maxStatePerPhase - 1)
         {
             enemyIndex = Random.Range(0, enemys.boss.Count);
             curEnemy = enemys.boss[enemyIndex];
@@ -67,9 +67,9 @@ public class EnemyController : Singleton<EnemyController>
         {
             case GameState.Normal:
 
-                if (GameManager.Instance.curPhase > 2)
+                if (GameManager.curPhase > 2)
                 {
-                    int GamePhase = GameManager.Instance.curPhase;
+                    int GamePhase = GameManager.curPhase;
                     int min = ((GamePhase - 1) * 100) - 50;
                     int max = (GamePhase - 1) * 100;
                     int hp = Random.Range(min, max);
@@ -85,7 +85,7 @@ public class EnemyController : Singleton<EnemyController>
 
                 break;
             case GameState.Boss:
-                int bossHp = GameManager.Instance.curPhase * 100;
+                int bossHp = GameManager.curPhase * 100;
                 curHP = bossHp;
                 maxHP = bossHp;
                 break;

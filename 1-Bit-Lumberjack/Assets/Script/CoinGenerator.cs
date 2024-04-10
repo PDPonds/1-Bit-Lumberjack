@@ -77,16 +77,11 @@ public class CoinGenerator : Singleton<CoinGenerator>
             float dropFormLooting = CalDropCoinAmount() * (SkillManager.Instance.GetValue(lootingSkill) / 100f);
             int result = dropFormEnemy + (int)dropFormLooting;
             SpawnAndSetupCoin(result);
-
-            Debug.Log("Enemy" + dropFormEnemy);
-            Debug.Log("Looting" + dropFormLooting);
-            Debug.Log("Result" + result);
         }
         else
         {
             int drop = CalDropCoinAmount();
             SpawnAndSetupCoin(drop);
-            Debug.Log(drop);
         }
     }
 
