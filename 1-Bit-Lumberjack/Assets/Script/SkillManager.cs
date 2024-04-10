@@ -249,7 +249,6 @@ public class Skill
 
     [Header("===== Infomation =====")]
     public string skillName;
-    public Sprite skillSprite;
     public string skillDiscription;
     [Header("===== Mana =====")]
     public float manaCost;
