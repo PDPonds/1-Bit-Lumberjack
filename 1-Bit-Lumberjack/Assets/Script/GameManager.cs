@@ -85,6 +85,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         SaveSystem.Load();
+        SaveSystem.Save();
     }
 
     private void Start()
@@ -95,6 +96,11 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         UpdateState();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveSystem.Save();
     }
 
     #region Game State
@@ -149,12 +155,14 @@ public class GameManager : Singleton<GameManager>
     {
         curCoin += amount;
         OnAddCoin?.Invoke();
+        SaveSystem.Save();
     }
 
     public void RemoveCoin(int amount)
     {
         curCoin -= amount;
         OnRemoveCoin?.Invoke();
+        SaveSystem.Save();
     }
 
     public bool CheckCoin(int amount)
@@ -187,6 +195,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         OnNextState?.Invoke();
+        SaveSystem.Save();
 
     }
 
@@ -195,12 +204,16 @@ public class GameManager : Singleton<GameManager>
         curPhase++;
         curState = 1;
         OnNextPhase?.Invoke();
+        SaveSystem.Save();
+
     }
 
     public void ResetPhaseAndState()
     {
         SwitchState(GameState.Normal);
         curState = 1;
+        SaveSystem.Save();
+
     }
 
     #endregion
@@ -212,6 +225,7 @@ public class GameManager : Singleton<GameManager>
         curMana += mulToAddMana;
         if (curMana >= maxMana) curMana = maxMana;
         OnAddMana?.Invoke();
+        SaveSystem.Save();
     }
 
     public void RemoveMana(float amount)
@@ -220,6 +234,7 @@ public class GameManager : Singleton<GameManager>
         {
             curMana -= amount;
             OnRemoveMana?.Invoke();
+            SaveSystem.Save();
         }
     }
 

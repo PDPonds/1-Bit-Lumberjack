@@ -174,6 +174,7 @@ public class UIManager : Singleton<UIManager>
     void UpgradeAxeBut()
     {
         GameManager.Instance.AddAxeLevel();
+        SaveSystem.Save();
     }
 
     void DisableUpgradeAxe()
@@ -202,6 +203,7 @@ public class UIManager : Singleton<UIManager>
     {
         Skill skill = SkillManager.Instance.GetSkill("Strike");
         SkillManager.Instance.UpgradeSkill(skill);
+        SaveSystem.Save();
     }
 
     void DisableUpgradeStrikeSkill()
@@ -268,6 +270,7 @@ public class UIManager : Singleton<UIManager>
     {
         Skill skill = SkillManager.Instance.GetSkill("Looting");
         SkillManager.Instance.UpgradeSkill(skill);
+        SaveSystem.Save();
     }
 
     void DisableUpgradeLootingSkill()
