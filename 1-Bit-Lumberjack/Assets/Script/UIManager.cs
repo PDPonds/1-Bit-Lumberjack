@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,7 +67,19 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] TextMeshProUGUI lootingManaCost;
     [SerializeField] Image lootingSkillTimeFill;
     [SerializeField] Image lootingSkillDelayFill;
-
+    [Header("===== Upgrade Teamwork =====")]
+    [Header("===== Upgrade Lumberjack =====")]
+    [SerializeField] TextMeshProUGUI lumberjackLevelText;
+    [SerializeField] TextMeshProUGUI lumberjackDiscriptionText;
+    [SerializeField] TextMeshProUGUI lumberjackCostText;
+    [SerializeField] TextMeshProUGUI lumberjackMulDamageText;
+    [SerializeField] Button upgradeLumberjackButton;
+    [Header("===== Upgrade Woodpecker =====")]
+    [SerializeField] TextMeshProUGUI woodpeckerLevelText;
+    [SerializeField] TextMeshProUGUI woodpeckerDiscriptionText;
+    [SerializeField] TextMeshProUGUI woodpeckerCostText;
+    [SerializeField] TextMeshProUGUI woodpeckerMulDamageText;
+    [SerializeField] Button upgradeWoodpeckerButton;
 
     private void OnEnable()
     {
@@ -128,6 +141,11 @@ public class UIManager : Singleton<UIManager>
 
         upgradeLootingButton.onClick.AddListener(UpgradeLootingSkill);
         lootingSkillButton.onClick.AddListener(UseLootingSkill);
+
+        upgradeLumberjackButton.onClick.AddListener(UpgradeLumberjack);
+
+        upgradeWoodpeckerButton.onClick.AddListener(UpgradeWoodpecker);
+
     }
 
     private void Start()
@@ -146,6 +164,9 @@ public class UIManager : Singleton<UIManager>
         DisableUpgradeAxe();
         DisableUpgradeStrikeSkill();
         DisableUpgradeLootingSkill();
+
+        DisableUpgradeLumberjack();
+        DisableUpgradeWoodpecker();
     }
 
     #region Mana
@@ -321,6 +342,78 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
+    #region Upgrade Teamwork
+
+    #endregion
+
+    #region Upgrade Lumberjack
+
+    void UpdateLumberjackInfo()
+    {
+        lumberjackLevelText.text = $"Lv. {GameManager.curLumberjackLevel}";
+        lumberjackDiscriptionText.text = $"{GameManager.Instance.lumberjack.GetCurDamage() / GameManager.Instance.lumberjack.teamMate.speed} / sec.";
+        lumberjackCostText.text = $"{GameManager.Instance.lumberjack.GetCurCost()}";
+        lumberjackMulDamageText.text = $"Damage : {GameManager.Instance.lumberjack.teamMate.mulDamagPerLevel}";
+    }
+
+    void UpgradeLumberjack()
+    {
+        int lumberjeckCost = GameManager.Instance.lumberjack.GetCurCost();
+        if (GameManager.Instance.CheckCoin(lumberjeckCost))
+        {
+            GameManager.Instance.RemoveCoin(lumberjeckCost);
+            GameManager.curLumberjackLevel++;
+            SaveSystem.Save();
+            UpdateLumberjackInfo();
+        }
+
+    }
+
+    void DisableUpgradeLumberjack()
+    {
+        int lumberjeckCost = GameManager.Instance.lumberjack.GetCurCost();
+        if (GameManager.Instance.CheckCoin(lumberjeckCost))
+            upgradeLumberjackButton.interactable = true;
+        else
+            upgradeLumberjackButton.interactable = false;
+    }
+
+
+    #endregion
+
+    #region Upgrade Woodpecker
+
+    void UpdateWoodpeckerInfo()
+    {
+        woodpeckerLevelText.text = $"Lv. {GameManager.curWoodpeckerLevel}";
+        woodpeckerDiscriptionText.text = $"{GameManager.Instance.woodpecker.GetCurDamage() / GameManager.Instance.woodpecker.teamMate.speed} / sec.";
+        woodpeckerCostText.text = $"{GameManager.Instance.woodpecker.GetCurCost()}";
+        woodpeckerMulDamageText.text = $"Damage : {GameManager.Instance.woodpecker.teamMate.mulDamagPerLevel}";
+    }
+
+    void UpgradeWoodpecker()
+    {
+        int woodpeckerCost = GameManager.Instance.woodpecker.GetCurCost();
+        if (GameManager.Instance.CheckCoin(woodpeckerCost))
+        {
+            GameManager.Instance.RemoveCoin(woodpeckerCost);
+            GameManager.curWoodpeckerLevel++;
+            SaveSystem.Save();
+            UpdateWoodpeckerInfo();
+        }
+    }
+
+    void DisableUpgradeWoodpecker()
+    {
+        int woodpeckerCost = GameManager.Instance.woodpecker.GetCurCost();
+        if (GameManager.Instance.CheckCoin(woodpeckerCost))
+            upgradeWoodpeckerButton.interactable = true;
+        else
+            upgradeWoodpeckerButton.interactable = false;
+    }
+
+    #endregion
+
     #region Boss
     void UpdateBossTime()
     {
@@ -453,11 +546,14 @@ public class UIManager : Singleton<UIManager>
         ShowTabUI(axeBorder);
         UpdateAxeUpgrade();
         UpdateStrikeSkill();
+        UpdateLootingSkill();
     }
 
     void ShowUpgradeTeam()
     {
         ShowTabUI(teamBorder);
+        UpdateLumberjackInfo();
+        UpdateWoodpeckerInfo();
     }
 
     void ShowGetAchievement()

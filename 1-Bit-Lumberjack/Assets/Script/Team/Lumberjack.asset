@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lumberjack
   m_EditorClassIdentifier: 
   mateName: Lumberjack
-  mateDescription: 
+  mateDescription: 'Damage :'
   startCost: 100
   mulCostPerLevel: 43
   startDamage: 50

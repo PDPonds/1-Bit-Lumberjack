@@ -9,7 +9,7 @@ public class TeamMateController : MonoBehaviour
 
     Animator anim;
 
-    [SerializeField] TeamMate teamMate;
+    public TeamMate teamMate;
 
     float curAtkTime;
 
@@ -48,18 +48,33 @@ public class TeamMateController : MonoBehaviour
     public int GetCurDamage()
     {
         if (teamMate.name == "Lumberjack")
-            return teamMate.startDamage + (GameManager.curLumberjackLevel * teamMate.mulDamagPerLevel);
+        {
+            if (GameManager.curLumberjackLevel > 1) return teamMate.startDamage + (GameManager.curLumberjackLevel * teamMate.mulDamagPerLevel);
+            else return teamMate.startDamage;
+        }
         else if (teamMate.name == "Woodpecker")
-            return teamMate.startDamage + (GameManager.curWoodpeckerLevel * teamMate.mulDamagPerLevel);
+        {
+            if (GameManager.curWoodpeckerLevel > 1) return teamMate.startDamage + (GameManager.curWoodpeckerLevel * teamMate.mulDamagPerLevel);
+            else return teamMate.startDamage;
+        }
+
         else return 0;
     }
 
     public int GetCurCost()
     {
         if (teamMate.name == "Lumberjack")
-            return teamMate.startCost + (GameManager.curLumberjackLevel * teamMate.mulCostPerLevel);
+        {
+            if (GameManager.curLumberjackLevel == 0) return teamMate.startCost;
+            else
+                return teamMate.startCost + (GameManager.curLumberjackLevel * teamMate.mulCostPerLevel);
+        }
         else if (teamMate.name == "Woodpecker")
-            return teamMate.startCost + (GameManager.curWoodpeckerLevel * teamMate.mulCostPerLevel);
+        {
+            if (GameManager.curWoodpeckerLevel == 0) return teamMate.startCost;
+            else
+                return teamMate.startCost + (GameManager.curWoodpeckerLevel * teamMate.mulCostPerLevel);
+        }
         else return 0;
     }
 

@@ -43,11 +43,11 @@ public class GameManager : Singleton<GameManager>
     public static int curLevelAxe = 1;
     public static int curStrikeLevel = 0;
     public static int curLootingLevel = 0;
+    public static int curLumberjackLevel = 0;
+    public static int curWoodpeckerLevel = 0;
 
     //Waiting
     public static int curTeamworkLevel = 0;
-    public static int curLumberjackLevel = 0;
-    public static int curWoodpeckerLevel = 0;
 
     #endregion
 
@@ -102,6 +102,9 @@ public class GameManager : Singleton<GameManager>
     private void Update()
     {
         UpdateState();
+
+        DisableLumberjack();
+        DisableWoodpecker();
     }
 
     private void OnApplicationQuit()
@@ -297,7 +300,17 @@ public class GameManager : Singleton<GameManager>
 
     #region Teammate
 
+    void DisableLumberjack()
+    {
+        if (curLumberjackLevel > 0) lumberjack.gameObject.SetActive(true);
+        else lumberjack.gameObject.SetActive(false);
+    }
 
+    void DisableWoodpecker()
+    {
+        if (curWoodpeckerLevel > 0) woodpecker.gameObject.SetActive(true);
+        else woodpecker.gameObject.SetActive(false);
+    }
 
     #endregion
 

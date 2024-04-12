@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Woodpecker
   m_EditorClassIdentifier: 
   mateName: Woodpecker
-  mateDescription: 
+  mateDescription: 'Damage :'
   startCost: 100
   mulCostPerLevel: 23
   startDamage: 10
