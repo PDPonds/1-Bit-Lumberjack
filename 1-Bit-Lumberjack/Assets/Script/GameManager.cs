@@ -191,11 +191,12 @@ public class GameManager : Singleton<GameManager>
             {
                 curState++;
             }
-            else if (curState == maxStatePerPhase - 1)
+            else
             {
-                SwitchState(GameState.Boss);
                 curState++;
+                SwitchState(GameState.Boss);
             }
+
         }
         else if (CheckGameState(GameState.Boss))
         {
@@ -214,7 +215,6 @@ public class GameManager : Singleton<GameManager>
         curState = 1;
         OnNextPhase?.Invoke();
         SaveSystem.Save();
-
     }
 
     public void ResetPhaseAndState()
