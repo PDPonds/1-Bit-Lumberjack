@@ -45,10 +45,7 @@ public class GameManager : Singleton<GameManager>
     public static int curLootingLevel = 0;
     public static int curLumberjackLevel = 0;
     public static int curWoodpeckerLevel = 0;
-
-    //Waiting
     public static int curTeamworkLevel = 0;
-
     #endregion
 
     [Header("===== Game State =====")]

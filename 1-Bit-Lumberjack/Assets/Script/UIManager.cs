@@ -68,6 +68,15 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] Image lootingSkillTimeFill;
     [SerializeField] Image lootingSkillDelayFill;
     [Header("===== Upgrade Teamwork =====")]
+    [SerializeField] TextMeshProUGUI teamworkLevelText;
+    [SerializeField] TextMeshProUGUI teamworkDiscriptionText;
+    [SerializeField] TextMeshProUGUI teamworkCostText;
+    [SerializeField] TextMeshProUGUI teamworkMulDamageText;
+    [SerializeField] Button upgradeTeamworkButton;
+    [SerializeField] Button teamworkSkillButton;
+    [SerializeField] TextMeshProUGUI teamworkManaCost;
+    [SerializeField] Image teamworkSkillTimeFill;
+    [SerializeField] Image teamworkSkillDelayFill;
     [Header("===== Upgrade Lumberjack =====")]
     [SerializeField] TextMeshProUGUI lumberjackLevelText;
     [SerializeField] TextMeshProUGUI lumberjackDiscriptionText;

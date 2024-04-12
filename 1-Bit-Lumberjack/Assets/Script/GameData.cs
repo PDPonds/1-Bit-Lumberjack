@@ -12,6 +12,9 @@ public class GameData
     public int curLevelAxe;
     public int curStrikeLevel;
     public int curLootingLevel;
+    public int curTeamworkLevel;
+    public int curLumberjackLevel;
+    public int curWoodpeckerLevel;
 
     public GameData()
     {
@@ -22,6 +25,9 @@ public class GameData
         curLevelAxe = GameManager.curLevelAxe;
         curStrikeLevel = GameManager.curStrikeLevel;
         curLootingLevel = GameManager.curLootingLevel;
+        curTeamworkLevel = GameManager.curTeamworkLevel;
+        curLumberjackLevel = GameManager.curLumberjackLevel;
+        curWoodpeckerLevel = GameManager.curWoodpeckerLevel;
     }
 
 }

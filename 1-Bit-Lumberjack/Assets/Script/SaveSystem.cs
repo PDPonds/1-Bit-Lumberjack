@@ -49,6 +49,9 @@ public static class SaveSystem
         GameManager.curLevelAxe = data.curLevelAxe;
         GameManager.curStrikeLevel = data.curStrikeLevel;
         GameManager.curLootingLevel = data.curLootingLevel;
+        GameManager.curTeamworkLevel = data.curTeamworkLevel;
+        GameManager.curLumberjackLevel = data.curLumberjackLevel;
+        GameManager.curWoodpeckerLevel = data.curWoodpeckerLevel;
     }
 
 }
