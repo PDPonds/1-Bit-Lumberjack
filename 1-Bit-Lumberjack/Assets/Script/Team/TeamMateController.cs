@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TeamMateController : MonoBehaviour
 {
+    public delegate void TeamAttackEvent(int amount);
+    public event TeamAttackEvent OnTeamAttack;
+
     Animator anim;
 
     [SerializeField] TeamMate teamMate;
@@ -37,7 +40,9 @@ public class TeamMateController : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("Attack");
+        OnTeamAttack?.Invoke(GetCurDamage());
+        TextGenerator.Instance.GenerateText(GetCurDamage());
+        anim.Play("Attack");
     }
 
     public int GetCurDamage()

@@ -26,6 +26,8 @@ public class EnemyController : Singleton<EnemyController>
     private void OnEnable()
     {
         PlayerManager.Instance.OnPlayerAttack += TakeDamage;
+        GameManager.Instance.lumberjack.OnTeamAttack += TakeDamage;
+        GameManager.Instance.woodpecker.OnTeamAttack += TakeDamage;
         GameManager.Instance.OnExitBossState += SetupEnemy;
     }
 

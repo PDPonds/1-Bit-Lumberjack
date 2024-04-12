@@ -76,6 +76,12 @@ public class GameManager : Singleton<GameManager>
     [Header("- MulDamage")]
     public int mulDamagePerLevel;
 
+    [Header("===== Team =====")]
+    [Header("- Lumberjack")]
+    public TeamMateController lumberjack;
+    [Header("- Woodpecker")]
+    public TeamMateController woodpecker;
+
     private void OnEnable()
     {
         EnemyController.Instance.OnEnemyDead += NextState;
