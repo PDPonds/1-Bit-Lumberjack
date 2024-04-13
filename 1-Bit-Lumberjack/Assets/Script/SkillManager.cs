@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum SkillState
 {
@@ -33,6 +32,18 @@ public class SkillManager : Singleton<SkillManager>
     public event LootingDelayEvent OnLootingDelay;
     #endregion
 
+    #region Teamwork Delegate And Event
+    public delegate void TeamworkReadyEvent();
+    public event TeamworkReadyEvent OnTeamworkReady;
+
+    public delegate void TeamworkUseEvent();
+    public event TeamworkUseEvent OnTeamworkUse;
+
+    public delegate void TeamworkDelayEvent();
+    public event TeamworkDelayEvent OnTeamworkDelay;
+    #endregion
+
+
     public Skill[] skills;
 
     [Header("===== Strike =====")]
@@ -43,11 +54,16 @@ public class SkillManager : Singleton<SkillManager>
     public SkillState lootingSkillState;
     [HideInInspector] public float curLootingDelay;
     [HideInInspector] public float curLootingTime;
+    [Header("===== Teamwork =====")]
+    public SkillState teamworkSkillState;
+    [HideInInspector] public float curTeamworkDelay;
+    [HideInInspector] public float curTeamworkTime;
 
     private void Update()
     {
         UpdateStrikeState();
         UpdateLootingState();
+        UpdateTeamworkState();
     }
 
     #region State Strike Skill
@@ -176,6 +192,69 @@ public class SkillManager : Singleton<SkillManager>
         }
     }
 
+    #endregion
+
+    #region State Teamwork Skill
+
+    void SwitchTeamworkState(SkillState state)
+    {
+        teamworkSkillState = state;
+        Skill skill = GetSkill("Teamwork");
+        switch (teamworkSkillState)
+        {
+            case SkillState.Ready:
+                OnTeamworkReady?.Invoke();
+                break;
+            case SkillState.Use:
+                OnTeamworkUse?.Invoke();
+                curTeamworkTime = skill.useTime;
+                break;
+            case SkillState.Delay:
+                OnTeamworkDelay?.Invoke();
+                curTeamworkDelay = skill.delayTime;
+                break;
+        }
+    }
+
+    void UpdateTeamworkState()
+    {
+        switch (teamworkSkillState)
+        {
+            case SkillState.Ready:
+                break;
+            case SkillState.Use:
+
+                curTeamworkTime -= Time.deltaTime;
+                if (curTeamworkTime < 0)
+                {
+                    SwitchTeamworkState(SkillState.Delay);
+                }
+
+                break;
+            case SkillState.Delay:
+                curTeamworkDelay -= Time.deltaTime;
+                if (curTeamworkDelay < 0)
+                {
+                    SwitchTeamworkState(SkillState.Ready);
+                }
+                break;
+        }
+    }
+
+    public bool CheckTeamworkState(SkillState state)
+    {
+        return teamworkSkillState == state;
+    }
+
+    public void UseTeamworkSkill()
+    {
+        Skill skill = GetSkill("Teamwork");
+        if (CheckTeamworkState(SkillState.Ready) && GetCanUse(skill))
+        {
+            GameManager.Instance.RemoveMana(GetSkillMana(skill));
+            SwitchTeamworkState(SkillState.Use);
+        }
+    }
     #endregion
 
     #region Function

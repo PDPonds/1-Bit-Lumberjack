@@ -128,6 +128,16 @@ public class UIManager : Singleton<UIManager>
         SkillManager.Instance.OnLootingDelay += () => ShowGO(lootingSkillDelayFill.gameObject);
         #endregion
 
+        #region Teamwork Skill
+        SkillManager.Instance.GetSkill("Teamwork").OnUpgradeSkill += UpdateTeamworkSkill;
+        SkillManager.Instance.OnTeamworkReady += () => CloseGO(teamworkSkillTimeFill.gameObject);
+        SkillManager.Instance.OnTeamworkReady += () => CloseGO(teamworkSkillDelayFill.gameObject);
+
+        SkillManager.Instance.OnTeamworkUse += () => ShowGO(teamworkSkillTimeFill.gameObject);
+
+        SkillManager.Instance.OnTeamworkDelay += () => CloseGO(teamworkSkillTimeFill.gameObject);
+        SkillManager.Instance.OnTeamworkDelay += () => ShowGO(teamworkSkillDelayFill.gameObject);
+        #endregion
 
     }
 
@@ -151,6 +161,9 @@ public class UIManager : Singleton<UIManager>
         upgradeLootingButton.onClick.AddListener(UpgradeLootingSkill);
         lootingSkillButton.onClick.AddListener(UseLootingSkill);
 
+        upgradeTeamworkButton.onClick.AddListener(UpgradeTeamworkSkill);
+        teamworkSkillButton.onClick.AddListener(UseTeamworkSkill);
+
         upgradeLumberjackButton.onClick.AddListener(UpgradeLumberjack);
 
         upgradeWoodpeckerButton.onClick.AddListener(UpgradeWoodpecker);
@@ -173,7 +186,7 @@ public class UIManager : Singleton<UIManager>
         DisableUpgradeAxe();
         DisableUpgradeStrikeSkill();
         DisableUpgradeLootingSkill();
-
+        DisableUpgradeTeamworkSkill();
         DisableUpgradeLumberjack();
         DisableUpgradeWoodpecker();
     }
@@ -352,6 +365,69 @@ public class UIManager : Singleton<UIManager>
     #endregion
 
     #region Upgrade Teamwork
+
+    void UpdateTeamworkSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Teamwork");
+        teamworkLevelText.text = $"Lv. {SkillManager.Instance.GetSkillLevel(skill)}";
+        teamworkDiscriptionText.text = $"{SkillManager.Instance.GetSkillDiscription(skill)} {SkillManager.Instance.GetValue(skill).ToString("N2")}%";
+        teamworkCostText.text = $"{SkillManager.Instance.GetCostToUpgrade(skill)}";
+        teamworkMulDamageText.text = $"Damage : {SkillManager.Instance.GetMulValue(skill)}";
+        teamworkManaCost.text = $"{SkillManager.Instance.GetSkillMana(skill)}";
+    }
+
+    void UpgradeTeamworkSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Teamwork");
+        SkillManager.Instance.UpgradeSkill(skill);
+        SaveSystem.Save();
+    }
+
+    void DisableUpgradeTeamworkSkill()
+    {
+        Skill skill = SkillManager.Instance.GetSkill("Teamwork");
+        if (SkillManager.Instance.GetCanUpgrade(skill))
+            upgradeTeamworkButton.interactable = true;
+        else
+            upgradeTeamworkButton.interactable = false;
+
+        if (SkillManager.Instance.HasSkill(skill))
+        {
+            teamworkSkillButton.gameObject.SetActive(true);
+            switch (SkillManager.Instance.teamworkSkillState)
+            {
+                case SkillState.Ready:
+                    teamworkSkillDelayFill.fillAmount = 1;
+                    teamworkSkillTimeFill.fillAmount = 1;
+
+                    if (SkillManager.Instance.GetCanUse(skill))
+                        teamworkSkillDelayFill.gameObject.SetActive(false);
+                    else
+                        teamworkSkillDelayFill.gameObject.SetActive(true);
+                    break;
+                case SkillState.Use:
+                    float curTime = SkillManager.Instance.curTeamworkTime;
+                    float maxTime = skill.useTime;
+                    float timePercent = curTime / maxTime;
+                    teamworkSkillTimeFill.fillAmount = timePercent;
+                    break;
+                case SkillState.Delay:
+                    float curDelay = SkillManager.Instance.curTeamworkDelay;
+                    float maxDelay = skill.delayTime;
+                    float delayPercent = curDelay / maxDelay;
+                    teamworkSkillDelayFill.fillAmount = delayPercent;
+                    break;
+            }
+        }
+        else
+            teamworkSkillButton.gameObject.SetActive(false);
+
+    }
+
+    void UseTeamworkSkill()
+    {
+        SkillManager.Instance.UseTeamworkSkill();
+    }
 
     #endregion
 
@@ -556,6 +632,7 @@ public class UIManager : Singleton<UIManager>
         UpdateAxeUpgrade();
         UpdateStrikeSkill();
         UpdateLootingSkill();
+        UpdateTeamworkSkill();
     }
 
     void ShowUpgradeTeam()
