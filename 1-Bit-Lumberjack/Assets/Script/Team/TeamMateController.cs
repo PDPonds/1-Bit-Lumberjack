@@ -40,8 +40,20 @@ public class TeamMateController : MonoBehaviour
 
     void Attack()
     {
-        OnTeamAttack?.Invoke(GetCurDamage());
-        TextGenerator.Instance.GenerateText(GetCurDamage());
+        if (SkillManager.Instance.CheckTeamworkState(SkillState.Use))
+        {
+            Skill teamworkSkill = SkillManager.Instance.GetSkill("Teamwork");
+            float strikeDmg = GetCurDamage() * (SkillManager.Instance.GetValue(teamworkSkill) / 100f);
+            int dmg = GetCurDamage() + (int)strikeDmg;
+            OnTeamAttack?.Invoke(dmg);
+            TextGenerator.Instance.GenerateText(dmg);
+        }
+        else
+        {
+            OnTeamAttack?.Invoke(GetCurDamage());
+            TextGenerator.Instance.GenerateText(GetCurDamage());
+        }
+
         anim.Play("Attack");
     }
 
