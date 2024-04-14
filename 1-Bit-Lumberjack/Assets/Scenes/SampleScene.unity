@@ -14637,6 +14637,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -14.4125
       objectReference: {fileID: 0}
+    - target: {fileID: 8486844549643299718, guid: a8ac4204d8211d942b3f6ea322b83604, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -105105772, guid: b83dc5fd0d7c8dc43bc49ce821e90251, type: 3}
     - target: {fileID: 9201360332280859539, guid: a8ac4204d8211d942b3f6ea322b83604, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14914,6 +14918,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -14.4125
       objectReference: {fileID: 0}
+    - target: {fileID: 5179598324935808710, guid: afe2ce6f87f905a4d95d836bf4d0277a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1165491146, guid: b83dc5fd0d7c8dc43bc49ce821e90251, type: 3}
     - target: {fileID: 5601404190655701131, guid: afe2ce6f87f905a4d95d836bf4d0277a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -15090,6 +15098,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArchievementManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: tapReward
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: tapBirdReward
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: tapMulPerLevel
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: useStrikeReward
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: useLootingReward
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: useTeamworkReward
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
+      propertyPath: killEnemyMulPerLevel
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 8956212544497405290, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15153,6 +15189,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 895532642}
     m_Modifications:
+    - target: {fileID: 26739430489309809, guid: b8fa98bd04e02214980c84a1d05553de, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1156664352, guid: b83dc5fd0d7c8dc43bc49ce821e90251, type: 3}
     - target: {fileID: 345271930574264295, guid: b8fa98bd04e02214980c84a1d05553de, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -16717,6 +16757,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TapBirdAchievement
       objectReference: {fileID: 0}
+    - target: {fileID: 7429749343866690660, guid: b6dc8b79175693a4b803ea551feaf81b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -297898028, guid: 2b3f23bebdfbbee48a40bac33247553d, type: 3}
     - target: {fileID: 8242372302648100196, guid: b6dc8b79175693a4b803ea551feaf81b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -18312,6 +18356,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -14.4125
       objectReference: {fileID: 0}
+    - target: {fileID: 5689921335628074388, guid: 0b944bf5e556af74b81290280e7a2663, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 59e49f38936be164284dc4049869a221, type: 3}
     - target: {fileID: 6149707966699219883, guid: 0b944bf5e556af74b81290280e7a2663, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -19448,6 +19496,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 895532642}
     m_Modifications:
+    - target: {fileID: 117112830535382081, guid: 48337d939b182c74e9030efb27e754cc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1156664352, guid: b83dc5fd0d7c8dc43bc49ce821e90251, type: 3}
     - target: {fileID: 226041673177790804, guid: 48337d939b182c74e9030efb27e754cc, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -19881,6 +19933,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -22.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4987909633527649141, guid: 4c24c6caee235ea4ba50505a6bf0dc89, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8eff33fe1dc01b439f587f230085705, type: 3}
     - target: {fileID: 5964725613652936507, guid: 4c24c6caee235ea4ba50505a6bf0dc89, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
