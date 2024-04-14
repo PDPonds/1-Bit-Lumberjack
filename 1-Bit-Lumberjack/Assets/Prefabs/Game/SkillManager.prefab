@@ -46,9 +46,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - skillName: Strike
-    skillSprite: {fileID: -1737122253, guid: b83dc5fd0d7c8dc43bc49ce821e90251, type: 3}
-    skillDiscription: Damage +
+    skillDiscription: Dmg +
     manaCost: 40
+    curLevel: 0
+    startUpgradeCost: 100
+    upgradeCostPerLevel: 20
+    startValue: 10
+    mulValue: 10.33
+    useTime: 20
+    delayTime: 30
+  - skillName: Looting
+    skillDiscription: Coin +
+    manaCost: 40
+    curLevel: 0
+    startUpgradeCost: 100
+    upgradeCostPerLevel: 20
+    startValue: 10
+    mulValue: 10.33
+    useTime: 20
+    delayTime: 30
+  - skillName: Teamwork
+    skillDiscription: Teammate Dmg +
+    manaCost: 20
     curLevel: 0
     startUpgradeCost: 100
     upgradeCostPerLevel: 20
@@ -59,3 +78,9 @@ MonoBehaviour:
   strikeSkillState: 0
   curStrikeDelay: 0
   curStrikeTime: 0
+  lootingSkillState: 0
+  curLootingDelay: 0
+  curLootingTime: 0
+  teamworkSkillState: 0
+  curTeamworkDelay: 0
+  curTeamworkTime: 0

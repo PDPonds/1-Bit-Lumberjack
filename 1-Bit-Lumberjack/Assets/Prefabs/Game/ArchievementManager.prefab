@@ -44,3 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3ae0cfc4fb7e248b7eb7ed4467f8f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tapMulPerLevel: 100
+  tapReward: 50
+  killEnemyMulPerLevel: 10
+  killEnemyReward: 100
+  enterPhaseMulPerLevel: 5
+  enterPhaseReward: 100
+  collectGoldMulPerLevel: 1000
+  collectGoldReward: 100
+  tapBirdMulPerLevel: 5
+  tapBirdReward: 100
+  useStrikeMulPerLevel: 5
+  useStrikeReward: 100
+  useLootingMulPerLevel: 5
+  useLootingReward: 100
+  useTeamworkMulPerLevel: 5
+  useTeamworkReward: 100

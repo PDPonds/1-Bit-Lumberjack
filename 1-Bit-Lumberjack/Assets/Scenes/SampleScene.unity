@@ -7841,7 +7841,6 @@ GameObject:
   - component: {fileID: 1514953000}
   - component: {fileID: 1514953002}
   - component: {fileID: 1514953001}
-  - component: {fileID: 1514953003}
   m_Layer: 5
   m_Name: AchievementBorder
   m_TagString: Untagged
@@ -7908,50 +7907,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514952999}
   m_CullTransparentMesh: 1
---- !u!114 &1514953003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514952999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cbeb05646cc25441b355fb50c27b111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tapCountText: {fileID: 222379944351935361}
-  tapRewardText: {fileID: 222379944351935362}
-  tapCountFill: {fileID: 222379944351935360}
-  tapRewardButton: {fileID: 222379944351935363}
-  killEnemyCountText: {fileID: 8846360821845575371}
-  killEnemyRewardText: {fileID: 8846360821845575368}
-  killEnemyCountFill: {fileID: 8846360821845575370}
-  killEnemyRewardButton: {fileID: 8846360821845575369}
-  enterPhaseCountText: {fileID: 5452811408559083107}
-  enterPhaseRewardText: {fileID: 5452811408559083104}
-  enterPhaseCountFill: {fileID: 5452811408559083106}
-  enterPhaseRewardButton: {fileID: 5452811408559083105}
-  collectGoldCountText: {fileID: 972675831206182864}
-  collectGoldRewardText: {fileID: 972675831206182861}
-  collectGoldCountFill: {fileID: 972675831206182863}
-  collectGoldRewardButton: {fileID: 972675831206182862}
-  tapBirdCountText: {fileID: 2176035046688839087}
-  tapBirdRewardText: {fileID: 2176035046688839084}
-  tapBirdCountFill: {fileID: 2176035046688839086}
-  tapBirdRewardButton: {fileID: 2176035046688839085}
-  useStrikeCountText: {fileID: 1964822643742370599}
-  useStrikeRewardText: {fileID: 1964822643742370596}
-  useStrikeCountFill: {fileID: 152021464}
-  useStrikeRewardButton: {fileID: 1964822643742370597}
-  useLootingCountText: {fileID: 8751320291267360923}
-  useLootingRewardText: {fileID: 8751320291267360920}
-  useLootingCountFill: {fileID: 8751320291267360922}
-  useLootingRewardButton: {fileID: 8751320291267360921}
-  useTeamworkCountText: {fileID: 1454899357284808}
-  useTeamworkRewardText: {fileID: 1454899357284805}
-  useTeamworkCountFill: {fileID: 1454899357284807}
-  useTeamworkRewardButton: {fileID: 1454899357284806}
 --- !u!1 &1543045815
 GameObject:
   m_ObjectHideFlags: 0
@@ -8481,6 +8436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1706554659}
   - component: {fileID: 1706554660}
+  - component: {fileID: 1706554661}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -8584,6 +8540,50 @@ MonoBehaviour:
   woodpeckerCostText: {fileID: 5774908552306604678}
   woodpeckerMulDamageText: {fileID: 4846140782097119038}
   upgradeWoodpeckerButton: {fileID: 7784495706347389842}
+--- !u!114 &1706554661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706554658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbeb05646cc25441b355fb50c27b111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tapCountText: {fileID: 222379944351935361}
+  tapRewardText: {fileID: 222379944351935362}
+  tapCountFill: {fileID: 222379944351935360}
+  tapRewardButton: {fileID: 222379944351935363}
+  killEnemyCountText: {fileID: 8846360821845575371}
+  killEnemyRewardText: {fileID: 8846360821845575368}
+  killEnemyCountFill: {fileID: 8846360821845575370}
+  killEnemyRewardButton: {fileID: 8846360821845575369}
+  enterPhaseCountText: {fileID: 5452811408559083107}
+  enterPhaseRewardText: {fileID: 5452811408559083104}
+  enterPhaseCountFill: {fileID: 5452811408559083106}
+  enterPhaseRewardButton: {fileID: 5452811408559083105}
+  collectGoldCountText: {fileID: 972675831206182864}
+  collectGoldRewardText: {fileID: 972675831206182861}
+  collectGoldCountFill: {fileID: 972675831206182863}
+  collectGoldRewardButton: {fileID: 972675831206182862}
+  tapBirdCountText: {fileID: 2176035046688839087}
+  tapBirdRewardText: {fileID: 2176035046688839084}
+  tapBirdCountFill: {fileID: 2176035046688839086}
+  tapBirdRewardButton: {fileID: 2176035046688839085}
+  useStrikeCountText: {fileID: 1964822643742370599}
+  useStrikeRewardText: {fileID: 1964822643742370596}
+  useStrikeCountFill: {fileID: 152021464}
+  useStrikeRewardButton: {fileID: 1964822643742370597}
+  useLootingCountText: {fileID: 8751320291267360923}
+  useLootingRewardText: {fileID: 8751320291267360920}
+  useLootingCountFill: {fileID: 8751320291267360922}
+  useLootingRewardButton: {fileID: 8751320291267360921}
+  useTeamworkCountText: {fileID: 1454899357284808}
+  useTeamworkRewardText: {fileID: 1454899357284805}
+  useTeamworkCountFill: {fileID: 1454899357284807}
+  useTeamworkRewardButton: {fileID: 1454899357284806}
 --- !u!1 &1773822798
 GameObject:
   m_ObjectHideFlags: 0
@@ -15090,102 +15090,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArchievementManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: tapReward
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: tapBirdReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: tapMulPerLevel
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: killEnemyReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useStrikeReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: enterPhaseReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useLootingReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: collectGoldReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useTeamworkReward
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: tapBirdMulPerLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: killEnemyMulPerLevel
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: tapRewardMulPerLevel
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useStrikeMulPerLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: enterPhaseMulPerLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useLootingMulPerLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: collectGoldMulPerLevel
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useTeamworkMulPerLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: tapBirdRewardMulPerLevel
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: killEnemyRewardMulPerLevel
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useStrikeRewardMulPerLevel
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: enterPhaseRewardMulPerLevel
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useLootingRewardMulPerLevel
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: collectGoldRewardMulPerLevel
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7595288310179473107, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
-      propertyPath: useTeamworkRewardMulPerLevel
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 8956212544497405290, guid: 86bea90363024eb48af03dc47bbfdaab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -17663,94 +17567,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].useTime
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].useTime
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[0].curLevel
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].manaCost
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].mulValue
-      value: 10.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].manaCost
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].mulValue
-      value: 10.33
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].delayTime
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].skillName
-      value: Looting
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].delayTime
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].skillName
-      value: Teamwork
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].startValue
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].startValue
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].skillSprite
-      value: 
-      objectReference: {fileID: 1156664352, guid: b83dc5fd0d7c8dc43bc49ce821e90251, type: 3}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[0].skillDiscription
-      value: Dmg +
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].skillDiscription
-      value: Coin +
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].startUpgradeCost
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].skillDiscription
-      value: Teammate Dmg +
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].startUpgradeCost
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[1].upgradeCostPerLevel
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4260891109807953470, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
-      propertyPath: skills.Array.data[2].upgradeCostPerLevel
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 5042295058655703699, guid: dc46d74abfe6dc146939db5470aa8713, type: 3}
       propertyPath: m_Name
       value: SkillManager
@@ -17873,10 +17689,6 @@ PrefabInstance:
     - target: {fileID: 2822209336227453126, guid: 0b9a7b3f01fd1884bb83228b32d6c306, type: 3}
       propertyPath: m_Name
       value: BirdGenerator
-      objectReference: {fileID: 0}
-    - target: {fileID: 3755226901136455253, guid: 0b9a7b3f01fd1884bb83228b32d6c306, type: 3}
-      propertyPath: birdGoBackTime
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5092610356913053536, guid: 0b9a7b3f01fd1884bb83228b32d6c306, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20279,6 +20091,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 724366559}
+  - {fileID: 1706554659}
   - {fileID: 765325467101297234}
   - {fileID: 4096796002596499554}
   - {fileID: 4456201170074305533}
@@ -20293,7 +20106,6 @@ SceneRoots:
   - {fileID: 1400642131}
   - {fileID: 4545350795804154771}
   - {fileID: 1176560374}
-  - {fileID: 1706554659}
   - {fileID: 1773822802}
   - {fileID: 433623702}
   - {fileID: 8142876049428075658}

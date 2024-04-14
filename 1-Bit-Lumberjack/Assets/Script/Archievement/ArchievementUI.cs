@@ -49,14 +49,14 @@ public class ArchievementUI : Singleton<ArchievementUI>
 
     private void OnEnable()
     {
-        UIManager.Instance.OnShowArchievement += () => UpdateTap();
-        UIManager.Instance.OnShowArchievement += () => UpdateKillEnemy();
-        UIManager.Instance.OnShowArchievement += () => UpdateEnterPhase();
-        UIManager.Instance.OnShowArchievement += () => UpdateCollectCoin();
-        UIManager.Instance.OnShowArchievement += () => UpdateTapBird();
-        UIManager.Instance.OnShowArchievement += () => UpdateStrike();
-        UIManager.Instance.OnShowArchievement += () => UpdateLooting();
-        UIManager.Instance.OnShowArchievement += () => UpdateTeamwork();
+        UIManager.Instance.OnShowArchievement += UpdateTap;
+        UIManager.Instance.OnShowArchievement += UpdateKillEnemy;
+        UIManager.Instance.OnShowArchievement += UpdateEnterPhase;
+        UIManager.Instance.OnShowArchievement += UpdateCollectCoin;
+        UIManager.Instance.OnShowArchievement += UpdateTapBird;
+        UIManager.Instance.OnShowArchievement += UpdateStrike;
+        UIManager.Instance.OnShowArchievement += UpdateLooting;
+        UIManager.Instance.OnShowArchievement += UpdateTeamwork;
 
     }
 
@@ -102,7 +102,7 @@ public class ArchievementUI : Singleton<ArchievementUI>
         DisableArchievementButton(collectGoldRewardButton, GameManager.curCollectGoldCount, goldTarget);
 
         int tapBirdTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapBirdArchievementLv, ArchievementManager.Instance.tapBirdMulPerLevel);
-        DisableArchievementButton(tapBirdRewardButton, GameManager.curTapCount, tapBirdTarget);
+        DisableArchievementButton(tapBirdRewardButton, GameManager.curTapBirdCount, tapBirdTarget);
 
         int useStrikeTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curStrikeArchievementLv, ArchievementManager.Instance.useStrikeMulPerLevel);
         DisableArchievementButton(useStrikeRewardButton, GameManager.curStrikeCount, useStrikeTarget);
@@ -123,7 +123,7 @@ public class ArchievementUI : Singleton<ArchievementUI>
         int target = ArchievementManager.Instance.GetArchievementTarget(curLevel, mulTarget);
         countText.text = $"{count} / {target}";
         rewardText.text = $"+ {reward}";
-        float percent = count / target;
+        float percent = (float)count / (float)target;
         fill.fillAmount = percent;
     }
 
@@ -140,53 +140,61 @@ public class ArchievementUI : Singleton<ArchievementUI>
 
     public void UpdateTap()
     {
-        UpdateArchievementInfo(GameManager.curTapArchievementLv, ArchievementManager.Instance.tapMulPerLevel,
-            tapCountText, GameManager.curTapCount, tapRewardText, ArchievementManager.Instance.tapReward, tapCountFill);
+        int mul = ArchievementManager.Instance.tapMulPerLevel;
+        int reward = ArchievementManager.Instance.tapReward;
+        UpdateArchievementInfo(GameManager.curTapArchievementLv, mul,
+            tapCountText, GameManager.curTapCount, tapRewardText, reward, tapCountFill);
     }
 
     void OnGetTapArchievement()
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.tapReward);
         GameManager.curTapArchievementLv++;
-        UpdateTap();
         SaveSystem.Save();
+        UpdateTap();
 
     }
 
     public void UpdateKillEnemy()
     {
-        UpdateArchievementInfo(GameManager.curKillEnemyArchievementLv, ArchievementManager.Instance.killEnemyMulPerLevel,
-    killEnemyCountText, GameManager.curKillEnemyCount, killEnemyRewardText, ArchievementManager.Instance.killEnemyReward, killEnemyCountFill);
+        int mul = ArchievementManager.Instance.killEnemyMulPerLevel;
+        int reward = ArchievementManager.Instance.killEnemyReward;
+        UpdateArchievementInfo(GameManager.curKillEnemyArchievementLv, mul,
+        killEnemyCountText, GameManager.curKillEnemyCount, killEnemyRewardText, reward, killEnemyCountFill);
     }
 
     void OnGetKillEnemyArchievement()
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.killEnemyReward);
         GameManager.curKillEnemyArchievementLv++;
-        UpdateKillEnemy();
         SaveSystem.Save();
+        UpdateKillEnemy();
 
     }
 
     public void UpdateEnterPhase()
     {
-        UpdateArchievementInfo(GameManager.curEnterPhaseArchievementLv, ArchievementManager.Instance.enterPhaseMulPerLevel,
-           enterPhaseCountText, GameManager.curEnterPhaseCount, enterPhaseRewardText, ArchievementManager.Instance.enterPhaseReward, enterPhaseCountFill);
+        int mul = ArchievementManager.Instance.enterPhaseMulPerLevel;
+        int reward = ArchievementManager.Instance.enterPhaseReward;
+        UpdateArchievementInfo(GameManager.curEnterPhaseArchievementLv, mul,
+           enterPhaseCountText, GameManager.curEnterPhaseCount, enterPhaseRewardText, reward, enterPhaseCountFill);
     }
 
     void OnGetEnterPhaseArchievement()
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.enterPhaseReward);
         GameManager.curEnterPhaseArchievementLv++;
-        UpdateEnterPhase();
         SaveSystem.Save();
+        UpdateEnterPhase();
 
     }
 
     public void UpdateCollectCoin()
     {
-        UpdateArchievementInfo(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel,
-           collectGoldCountText, GameManager.curCollectGoldCount, collectGoldRewardText, ArchievementManager.Instance.collectGoldReward, collectGoldCountFill);
+        int mul = ArchievementManager.Instance.collectGoldMulPerLevel;
+        int reward = ArchievementManager.Instance.collectGoldReward;
+        UpdateArchievementInfo(GameManager.curCollectGoldArchievementLv, mul,
+           collectGoldCountText, GameManager.curCollectGoldCount, collectGoldRewardText, reward, collectGoldCountFill);
 
     }
 
@@ -194,30 +202,34 @@ public class ArchievementUI : Singleton<ArchievementUI>
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.collectGoldReward);
         GameManager.curCollectGoldArchievementLv++;
-        UpdateCollectCoin();
         SaveSystem.Save();
+        UpdateCollectCoin();
 
     }
 
     public void UpdateTapBird()
     {
-        UpdateArchievementInfo(GameManager.curTapBirdArchievementLv, ArchievementManager.Instance.tapBirdMulPerLevel,
-          tapBirdCountText, GameManager.curTapBirdCount, tapBirdRewardText, ArchievementManager.Instance.tapBirdReward, tapBirdCountFill);
+        int mul = ArchievementManager.Instance.tapBirdMulPerLevel;
+        int reward = ArchievementManager.Instance.tapBirdReward;
+        UpdateArchievementInfo(GameManager.curTapBirdArchievementLv, mul,
+          tapBirdCountText, GameManager.curTapBirdCount, tapBirdRewardText, reward, tapBirdCountFill);
     }
 
     void OnGetTapBirdArchievement()
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.tapBirdReward);
         GameManager.curTapBirdArchievementLv++;
-        UpdateTapBird();
         SaveSystem.Save();
+        UpdateTapBird();
 
     }
 
     public void UpdateStrike()
     {
-        UpdateArchievementInfo(GameManager.curStrikeArchievementLv, ArchievementManager.Instance.useStrikeMulPerLevel,
-          useStrikeCountText, GameManager.curStrikeCount, useStrikeRewardText, ArchievementManager.Instance.useStrikeReward, useStrikeCountFill);
+        int mul = ArchievementManager.Instance.useStrikeMulPerLevel;
+        int reward = ArchievementManager.Instance.useStrikeReward;
+        UpdateArchievementInfo(GameManager.curStrikeArchievementLv, mul,
+          useStrikeCountText, GameManager.curStrikeCount, useStrikeRewardText, reward, useStrikeCountFill);
 
     }
 
@@ -225,15 +237,17 @@ public class ArchievementUI : Singleton<ArchievementUI>
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.useStrikeReward);
         GameManager.curStrikeArchievementLv++;
-        UpdateStrike();
         SaveSystem.Save();
+        UpdateStrike();
 
     }
 
     public void UpdateLooting()
     {
-        UpdateArchievementInfo(GameManager.curLootingArchievementLv, ArchievementManager.Instance.useLootingMulPerLevel,
-           useLootingCountText, GameManager.curLootingCount, useLootingRewardText, ArchievementManager.Instance.useLootingReward, useLootingCountFill);
+        int mul = ArchievementManager.Instance.useLootingMulPerLevel;
+        int reward = ArchievementManager.Instance.useLootingReward;
+        UpdateArchievementInfo(GameManager.curLootingArchievementLv, mul,
+           useLootingCountText, GameManager.curLootingCount, useLootingRewardText, reward, useLootingCountFill);
 
     }
 
@@ -241,15 +255,17 @@ public class ArchievementUI : Singleton<ArchievementUI>
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.useLootingReward);
         GameManager.curLootingArchievementLv++;
-        UpdateLooting();
         SaveSystem.Save();
+        UpdateLooting();
 
     }
 
     public void UpdateTeamwork()
     {
-        UpdateArchievementInfo(GameManager.curTeamworkArchievementLv, ArchievementManager.Instance.useTeamworkMulPerLevel,
-           useTeamworkCountText, GameManager.curTeamworkCount, useTeamworkRewardText, ArchievementManager.Instance.useTeamworkReward, useTeamworkCountFill);
+        int mul = ArchievementManager.Instance.useTeamworkMulPerLevel;
+        int reward = ArchievementManager.Instance.useTeamworkReward;
+        UpdateArchievementInfo(GameManager.curTeamworkArchievementLv, mul,
+           useTeamworkCountText, GameManager.curTeamworkCount, useTeamworkRewardText, reward, useTeamworkCountFill);
 
     }
 
@@ -257,8 +273,8 @@ public class ArchievementUI : Singleton<ArchievementUI>
     {
         CoinGenerator.Instance.SpawnAndSetupCoin(ArchievementManager.Instance.useTeamworkReward);
         GameManager.curTeamworkArchievementLv++;
-        UpdateTeamwork();
         SaveSystem.Save();
+        UpdateTeamwork();
 
     }
 

@@ -117,6 +117,7 @@ MonoBehaviour:
   spawnAndExitRightPos: {fileID: 5359147968447263458}
   minSpawnBirdDelayTime: 30
   maxSpawnBirdDelayTime: 50
+  birdGoBackTime: 15
   curBird: {fileID: 0}
 --- !u!1 &3681682808520968187
 GameObject:

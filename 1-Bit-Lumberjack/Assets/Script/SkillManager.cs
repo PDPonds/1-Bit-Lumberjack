@@ -59,6 +59,11 @@ public class SkillManager : Singleton<SkillManager>
     [HideInInspector] public float curTeamworkDelay;
     [HideInInspector] public float curTeamworkTime;
 
+    private void Start()
+    {
+        SetupSkill();
+    }
+
     private void Update()
     {
         UpdateStrikeState();
@@ -313,6 +318,29 @@ public class SkillManager : Singleton<SkillManager>
     public bool HasSkill(Skill skill)
     {
         return skill.HasSkill();
+    }
+
+    void SetupSkill()
+    {
+        Skill strike = GetSkill("Strike");
+        Skill looting = GetSkill("Looting");
+        Skill teamwork = GetSkill("Teamwork");
+
+        for (int i = 0; i < skills.Length; i++)
+        {
+            if (skills[i].skillName == strike.skillName)
+            {
+                skills[i].curLevel = GameManager.curStrikeLevel;
+            }
+            else if (skills[i].skillName == looting.skillName)
+            {
+                skills[i].curLevel = GameManager.curLootingLevel;
+            }
+            else if (skills[i].skillName == teamwork.skillName)
+            {
+                skills[i].curLevel = GameManager.curTeamworkLevel;
+            }
+        }
     }
 
     #endregion

@@ -52,6 +52,7 @@ public class GameData
         curStrikeCount = GameManager.curStrikeCount;
         curLootingCount = GameManager.curLootingCount;
         curTeamworkCount = GameManager.curTeamworkCount;
+
         curTapArchievementLv = GameManager.curTapArchievementLv;
         curKillEnemyArchievementLv = GameManager.curKillEnemyArchievementLv;
         curEnterPhaseArchievementLv = GameManager.curEnterPhaseArchievementLv;
