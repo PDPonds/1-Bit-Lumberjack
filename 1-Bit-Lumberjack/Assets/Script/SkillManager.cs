@@ -322,21 +322,17 @@ public class SkillManager : Singleton<SkillManager>
 
     void SetupSkill()
     {
-        Skill strike = GetSkill("Strike");
-        Skill looting = GetSkill("Looting");
-        Skill teamwork = GetSkill("Teamwork");
-
         for (int i = 0; i < skills.Length; i++)
         {
-            if (skills[i].skillName == strike.skillName)
+            if (skills[i].skillName == "Strike")
             {
                 skills[i].curLevel = GameManager.curStrikeLevel;
             }
-            else if (skills[i].skillName == looting.skillName)
+            else if (skills[i].skillName == "Looting")
             {
                 skills[i].curLevel = GameManager.curLootingLevel;
             }
-            else if (skills[i].skillName == teamwork.skillName)
+            else if (skills[i].skillName == "Teamwork")
             {
                 skills[i].curLevel = GameManager.curTeamworkLevel;
             }
@@ -403,8 +399,20 @@ public class Skill
             int cost = GetCostToUpgrade();
             GameManager.Instance.RemoveCoin(cost);
             curLevel++;
-            OnUpgradeSkill?.Invoke();
+            if (skillName == "Strike")
+            {
+                GameManager.curStrikeLevel++;
+            }
+            else if (skillName == "Looting")
+            {
+                GameManager.curLootingLevel++;
+            }
+            else if (skillName == "Teamwork")
+            {
+                GameManager.curTeamworkLevel++;
+            }
             SaveSystem.Save();
+            OnUpgradeSkill?.Invoke();
         }
     }
 
