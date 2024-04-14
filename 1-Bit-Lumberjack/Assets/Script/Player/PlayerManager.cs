@@ -24,8 +24,12 @@ public class PlayerManager : Singleton<PlayerManager>
 
     private void Awake()
     {
-        curAttackDamage = GameManager.Instance.CalAxeDamage();
         anim = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        curAttackDamage = GameManager.Instance.CalAxeDamage();
     }
 
     public void Tap()
@@ -33,6 +37,10 @@ public class PlayerManager : Singleton<PlayerManager>
         ParticleManager.Instance.SpawnParticle("TapParticle", GetWorldPosFormTouchPoint3D());
         Attack();
         TryGetTouchObject();
+        GameManager.curTapCount++;
+        ArchievementUI.Instance.UpdateTap();
+
+        SaveSystem.Save();
     }
 
     void Attack()

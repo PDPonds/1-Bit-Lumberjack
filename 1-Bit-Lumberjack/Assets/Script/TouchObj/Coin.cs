@@ -46,6 +46,9 @@ public class Coin : MonoBehaviour, ITouchObject
     void AddCoin()
     {
         GameManager.Instance.AddCoin(amount);
+        GameManager.curCollectGoldCount++;
+        ArchievementUI.Instance.UpdateCollectCoin();
+        SaveSystem.Save();
         Destroy(gameObject);
     }
 

@@ -52,6 +52,23 @@ public static class SaveSystem
         GameManager.curTeamworkLevel = data.curTeamworkLevel;
         GameManager.curLumberjackLevel = data.curLumberjackLevel;
         GameManager.curWoodpeckerLevel = data.curWoodpeckerLevel;
+        GameManager.curTapCount = data.curTapCount;
+        GameManager.curKillEnemyCount = data.curKillEnemyCount;
+        GameManager.curCollectGoldCount = data.curCollectGoldCount;
+        GameManager.curEnterPhaseCount = data.curEnterPhaseCount;
+        GameManager.curTapBirdCount = data.curTapBirdCount;
+        GameManager.curStrikeCount = data.curStrikeCount;
+        GameManager.curLootingCount = data.curLootingCount;
+        GameManager.curTeamworkCount = data.curTeamworkCount;
+        GameManager.curKillEnemyArchievementLv = data.curKillEnemyArchievementLv;
+        GameManager.curEnterPhaseArchievementLv = data.curEnterPhaseArchievementLv;
+        GameManager.curCollectGoldArchievementLv = data.curCollectGoldArchievementLv;
+        GameManager.curTapBirdArchievementLv = data.curTapBirdArchievementLv;
+        GameManager.curStrikeArchievementLv = data.curStrikeArchievementLv;
+        GameManager.curLootingArchievementLv = data.curLootingArchievementLv;
+        GameManager.curTeamworkArchievementLv = data.curTeamworkArchievementLv;
+
+
     }
 
 }

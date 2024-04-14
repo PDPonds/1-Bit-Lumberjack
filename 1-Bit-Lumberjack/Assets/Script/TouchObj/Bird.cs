@@ -32,6 +32,9 @@ public class Bird : MonoBehaviour, ITouchObject
             exitPos = BirdGenerator.Instance.spawnAndExitRightPos;
         }
         SwitchBehavior(BirdBehavior.MoveExit);
+        GameManager.curTapBirdCount++;
+        ArchievementUI.Instance.UpdateTapBird();
+        SaveSystem.Save();
     }
 
     private void Update()

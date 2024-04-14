@@ -46,6 +46,22 @@ public class GameManager : Singleton<GameManager>
     public static int curLumberjackLevel = 0;
     public static int curWoodpeckerLevel = 0;
     public static int curTeamworkLevel = 0;
+    public static int curTapArchievementLv = 1;
+    public static int curTapCount = 0;
+    public static int curKillEnemyArchievementLv = 1;
+    public static int curKillEnemyCount = 0;
+    public static int curEnterPhaseArchievementLv = 1;
+    public static int curEnterPhaseCount = 0;
+    public static int curCollectGoldArchievementLv = 1;
+    public static int curCollectGoldCount = 0;
+    public static int curTapBirdArchievementLv = 1;
+    public static int curTapBirdCount = 0;
+    public static int curStrikeArchievementLv = 1;
+    public static int curStrikeCount = 0;
+    public static int curLootingArchievementLv = 1;
+    public static int curLootingCount = 0;
+    public static int curTeamworkArchievementLv = 1;
+    public static int curTeamworkCount = 0;
     #endregion
 
     [Header("===== Game State =====")]
@@ -211,6 +227,8 @@ public class GameManager : Singleton<GameManager>
         curPhase++;
         curState = 1;
         OnNextPhase?.Invoke();
+        curEnterPhaseCount++;
+        ArchievementUI.Instance.UpdateEnterPhase();
         SaveSystem.Save();
     }
 

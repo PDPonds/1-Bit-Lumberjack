@@ -111,7 +111,9 @@ public class EnemyController : Singleton<EnemyController>
         SetupEnemy();
         anim.Play("EnemyDead");
         OnEnemyDead?.Invoke();
-        
+        GameManager.curKillEnemyCount++;
+        ArchievementUI.Instance.UpdateKillEnemy();
+        SaveSystem.Save();
     }
 
 }

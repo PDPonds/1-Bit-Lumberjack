@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    public delegate void OnShowArchievementEvent();
+    public event OnShowArchievementEvent OnShowArchievement;
+
     delegate void OnFuncFinsh();
 
     [Header("===== Coin =====")]
@@ -293,6 +296,9 @@ public class UIManager : Singleton<UIManager>
     void UseStrikeSkill()
     {
         SkillManager.Instance.UseStrikeSkill();
+        GameManager.curStrikeCount++;
+        ArchievementUI.Instance.UpdateStrike();
+        SaveSystem.Save();
     }
 
     #endregion
@@ -360,6 +366,9 @@ public class UIManager : Singleton<UIManager>
     void UseLootingSkill()
     {
         SkillManager.Instance.UseLootingSkill();
+        GameManager.curLootingCount++;
+        ArchievementUI.Instance.UpdateLooting();
+        SaveSystem.Save();
     }
 
     #endregion
@@ -427,6 +436,9 @@ public class UIManager : Singleton<UIManager>
     void UseTeamworkSkill()
     {
         SkillManager.Instance.UseTeamworkSkill();
+        GameManager.curTeamworkCount++;
+        ArchievementUI.Instance.UpdateTeamwork();
+        SaveSystem.Save();
     }
 
     #endregion
@@ -645,6 +657,7 @@ public class UIManager : Singleton<UIManager>
     void ShowGetAchievement()
     {
         ShowTabUI(achievementBorder);
+        OnShowArchievement?.Invoke();
     }
 
     #endregion

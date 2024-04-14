@@ -376,6 +376,7 @@ public class Skill
             GameManager.Instance.RemoveCoin(cost);
             curLevel++;
             OnUpgradeSkill?.Invoke();
+            SaveSystem.Save();
         }
     }
 
