@@ -60,6 +60,7 @@ public static class SaveSystem
         GameManager.curStrikeCount = data.curStrikeCount;
         GameManager.curLootingCount = data.curLootingCount;
         GameManager.curTeamworkCount = data.curTeamworkCount;
+        GameManager.curTapCount = data.curTapCount;
         GameManager.curKillEnemyArchievementLv = data.curKillEnemyArchievementLv;
         GameManager.curEnterPhaseArchievementLv = data.curEnterPhaseArchievementLv;
         GameManager.curCollectGoldArchievementLv = data.curCollectGoldArchievementLv;
