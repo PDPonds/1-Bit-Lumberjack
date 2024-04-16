@@ -37,7 +37,7 @@ public class GameManager : Singleton<GameManager>
     #region Static Variable
     //Finish
     public static int curCoin = 0;
-    public static float curMana = 0;
+    public static float curMana = 100;
     public static int curPhase = 1;
     public static int curState = 1;
     public static int curLevelAxe = 1;

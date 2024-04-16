@@ -46,12 +46,12 @@ public class TeamMateController : MonoBehaviour
             float strikeDmg = GetCurDamage() * (SkillManager.Instance.GetValue(teamworkSkill) / 100f);
             int dmg = GetCurDamage() + (int)strikeDmg;
             OnTeamAttack?.Invoke(dmg);
-            TextGenerator.Instance.GenerateText(dmg);
+            //TextGenerator.Instance.GenerateText(dmg);
         }
         else
         {
             OnTeamAttack?.Invoke(GetCurDamage());
-            TextGenerator.Instance.GenerateText(GetCurDamage());
+            //TextGenerator.Instance.GenerateText(GetCurDamage());
         }
 
         anim.Play("Attack");

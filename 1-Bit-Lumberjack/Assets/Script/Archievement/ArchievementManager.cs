@@ -12,7 +12,7 @@ public class ArchievementManager : Singleton<ArchievementManager>
 
     [Header("===== Kill Enemy Archievement =====")]
     public int killEnemyMulPerLevel;
-    public   int killEnemyReward;
+    public int killEnemyReward;
 
     [Header("===== Enter Phase Archievement =====")]
     public int enterPhaseMulPerLevel;
@@ -28,7 +28,7 @@ public class ArchievementManager : Singleton<ArchievementManager>
 
     [Header("===== Use Strike Archievement =====")]
     public int useStrikeMulPerLevel;
-    public   int useStrikeReward;
+    public int useStrikeReward;
 
     [Header("===== Use Looting Archievement =====")]
     public int useLootingMulPerLevel;
@@ -37,6 +37,7 @@ public class ArchievementManager : Singleton<ArchievementManager>
     [Header("===== Use Teamwork Archievement =====")]
     public int useTeamworkMulPerLevel;
     public int useTeamworkReward;
+
 
     public int GetArchievementTarget(int curLevel, int mulPerLv)
     {

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ArchievementUI : Singleton<ArchievementUI>
 {
+    [SerializeField] GameObject alertIcon;
     [Header("===== Tap Archievement =====")]
     [SerializeField] TextMeshProUGUI tapCountText;
     [SerializeField] TextMeshProUGUI tapRewardText;
@@ -89,6 +90,8 @@ public class ArchievementUI : Singleton<ArchievementUI>
 
     private void Update()
     {
+        DisableAlert();
+
         int tapTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapArchievementLv, ArchievementManager.Instance.tapMulPerLevel);
         DisableArchievementButton(tapRewardButton, GameManager.curTapCount, tapTarget);
 
@@ -276,6 +279,32 @@ public class ArchievementUI : Singleton<ArchievementUI>
         SaveSystem.Save();
         UpdateTeamwork();
 
+    }
+
+    void DisableAlert()
+    {
+        int tapTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapArchievementLv, ArchievementManager.Instance.tapMulPerLevel);
+        int killTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curKillEnemyArchievementLv, ArchievementManager.Instance.killEnemyMulPerLevel);
+        int phaseTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curEnterPhaseArchievementLv, ArchievementManager.Instance.enterPhaseMulPerLevel);
+        int goldTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
+        int tapBirdTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapBirdArchievementLv, ArchievementManager.Instance.tapBirdMulPerLevel);
+        int useStrikeTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curStrikeArchievementLv, ArchievementManager.Instance.useStrikeMulPerLevel);
+        int useLootingTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curLootingArchievementLv, ArchievementManager.Instance.useLootingMulPerLevel);
+        int useTeamworkTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTeamworkArchievementLv, ArchievementManager.Instance.useTeamworkMulPerLevel);
+
+        if (ArchievementManager.Instance.CanTakeReward(GameManager.curTapCount, tapTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curKillEnemyCount, killTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curEnterPhaseCount, phaseTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curCollectGoldCount, goldTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curTapBirdCount, tapBirdTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curStrikeCount, useStrikeTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curLootingCount, useLootingTarget) ||
+        ArchievementManager.Instance.CanTakeReward(GameManager.curTeamworkCount, useTeamworkTarget))
+        {
+            alertIcon.SetActive(true);
+        }
+        else
+            alertIcon.SetActive(false);
     }
 
 }
