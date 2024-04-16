@@ -44,6 +44,11 @@ public class ArchievementManager : Singleton<ArchievementManager>
         return curLevel * mulPerLv;
     }
 
+    public int GetArchievementTargetForCoint(int curLevel, int mulPerLv)
+    {
+        return (curLevel * curLevel) * mulPerLv;
+    }
+
     public bool CanTakeReward(int count, int target)
     {
         return count >= target;

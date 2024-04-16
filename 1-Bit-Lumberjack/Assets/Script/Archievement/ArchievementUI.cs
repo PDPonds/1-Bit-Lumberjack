@@ -72,7 +72,7 @@ public class ArchievementUI : Singleton<ArchievementUI>
         int phaseTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curEnterPhaseArchievementLv, ArchievementManager.Instance.enterPhaseMulPerLevel);
         enterPhaseRewardButton.onClick.AddListener(() => ArchievementManager.Instance.RewardBut(GameManager.curEnterPhaseCount, phaseTarget, OnGetEnterPhaseArchievement));
 
-        int goldTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
+        int goldTarget = ArchievementManager.Instance.GetArchievementTargetForCoint(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
         collectGoldRewardButton.onClick.AddListener(() => ArchievementManager.Instance.RewardBut(GameManager.curCollectGoldCount, goldTarget, OnGetCollectGoldArchievement));
 
         int tapBirdTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapBirdArchievementLv, ArchievementManager.Instance.tapBirdMulPerLevel);
@@ -101,7 +101,7 @@ public class ArchievementUI : Singleton<ArchievementUI>
         int phaseTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curEnterPhaseArchievementLv, ArchievementManager.Instance.enterPhaseMulPerLevel);
         DisableArchievementButton(enterPhaseRewardButton, GameManager.curEnterPhaseCount, phaseTarget);
 
-        int goldTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
+        int goldTarget = ArchievementManager.Instance.GetArchievementTargetForCoint(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
         DisableArchievementButton(collectGoldRewardButton, GameManager.curCollectGoldCount, goldTarget);
 
         int tapBirdTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapBirdArchievementLv, ArchievementManager.Instance.tapBirdMulPerLevel);
@@ -123,7 +123,13 @@ public class ArchievementUI : Singleton<ArchievementUI>
     public void UpdateArchievementInfo(int curLevel, int mulTarget, TextMeshProUGUI countText, int count,
         TextMeshProUGUI rewardText, int reward, Image fill)
     {
-        int target = ArchievementManager.Instance.GetArchievementTarget(curLevel, mulTarget);
+        int target;
+
+        if (countText == collectGoldCountText && rewardText == collectGoldRewardText && fill == collectGoldCountFill)
+            target = ArchievementManager.Instance.GetArchievementTargetForCoint(curLevel, mulTarget);
+        else
+            target = ArchievementManager.Instance.GetArchievementTarget(curLevel, mulTarget);
+
         countText.text = $"{count} / {target}";
         rewardText.text = $"+ {reward}";
         float percent = (float)count / (float)target;
@@ -286,7 +292,7 @@ public class ArchievementUI : Singleton<ArchievementUI>
         int tapTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapArchievementLv, ArchievementManager.Instance.tapMulPerLevel);
         int killTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curKillEnemyArchievementLv, ArchievementManager.Instance.killEnemyMulPerLevel);
         int phaseTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curEnterPhaseArchievementLv, ArchievementManager.Instance.enterPhaseMulPerLevel);
-        int goldTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
+        int goldTarget = ArchievementManager.Instance.GetArchievementTargetForCoint(GameManager.curCollectGoldArchievementLv, ArchievementManager.Instance.collectGoldMulPerLevel);
         int tapBirdTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curTapBirdArchievementLv, ArchievementManager.Instance.tapBirdMulPerLevel);
         int useStrikeTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curStrikeArchievementLv, ArchievementManager.Instance.useStrikeMulPerLevel);
         int useLootingTarget = ArchievementManager.Instance.GetArchievementTarget(GameManager.curLootingArchievementLv, ArchievementManager.Instance.useLootingMulPerLevel);
