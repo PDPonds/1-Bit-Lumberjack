@@ -35,6 +35,9 @@ public class Bird : MonoBehaviour, ITouchObject
         GameManager.curTapBirdCount++;
         ArchievementUI.Instance.UpdateTapBird();
         SaveSystem.Save();
+
+        AdsManager.Instance.OnTapBirdAndGetReward();
+
     }
 
     private void Update()
