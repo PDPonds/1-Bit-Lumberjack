@@ -3341,13 +3341,9 @@ MonoBehaviour:
   choiceToWatchAdsBorder: {fileID: 287988048}
   watchAdsBut: {fileID: 932497967}
   cancleToWatchAdsBut: {fileID: 1527830972}
-  rewardImage: {fileID: 2098092896}
   rewardsAdsInfo: {fileID: 1885249511}
   rewardsAdsInfoBorder: {fileID: 916941970}
   takeRewardBut: {fileID: 1401439695}
-  rewardInfoImage: {fileID: 1537103037}
-  adsRewardSprtie: {fileID: 0}
-  birdRewardSprtie: {fileID: 0}
 --- !u!114 &591883548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9341,7 +9337,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5b9b2c1c217ed91439bcd652c0190b50, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16495,7 +16491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 5b9b2c1c217ed91439bcd652c0190b50, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

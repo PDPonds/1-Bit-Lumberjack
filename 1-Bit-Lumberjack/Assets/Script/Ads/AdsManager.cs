@@ -16,17 +16,10 @@ public class AdsManager : Singleton<AdsManager>
     [SerializeField] GameObject choiceToWatchAdsBorder;
     [SerializeField] Button watchAdsBut;
     [SerializeField] Button cancleToWatchAdsBut;
-    [SerializeField] Image rewardImage;
     [Space(5f)]
     [SerializeField] GameObject rewardsAdsInfo;
     [SerializeField] GameObject rewardsAdsInfoBorder;
     [SerializeField] Button takeRewardBut;
-    [SerializeField] Image rewardInfoImage;
-    [Space(5f)]
-    [Header("===== Form Ads Reward Button =====")]
-    [SerializeField] Sprite adsRewardSprtie;
-    [Header("===== Form Bird Reward =====")]
-    [SerializeField] Sprite birdRewardSprtie;
 
     private void Awake()
     {
@@ -35,7 +28,7 @@ public class AdsManager : Singleton<AdsManager>
         curRewardTime = rewardsTime;
 
         Button adsRewardButton = adsReward.GetComponent<Button>();
-        adsRewardButton.onClick.AddListener(() => EnableChoiceToWatchAds(adsRewardSprtie));
+        adsRewardButton.onClick.AddListener(() => EnableChoiceToWatchAds());
 
         watchAdsBut.onClick.AddListener(() => ShowAdsReward());
         cancleToWatchAdsBut.onClick.AddListener(() => DisableChoiceToWatchAds());
@@ -47,12 +40,13 @@ public class AdsManager : Singleton<AdsManager>
         AutoEnableAdsReward();
     }
     #region On Touch Bird
+
     public void OnTapBirdAndGetReward()
     {
         float i = Random.Range(0, 1f);
         if (i > 0.5f) return;
 
-        EnableChoiceToWatchAds(birdRewardSprtie);
+        EnableChoiceToWatchAds();
     }
 
     #endregion
@@ -85,12 +79,9 @@ public class AdsManager : Singleton<AdsManager>
     #endregion
 
     #region Choice To Watch Ads
-    public void EnableChoiceToWatchAds(Sprite sprite)
+    public void EnableChoiceToWatchAds()
     {
         DisableAdsReward();
-
-        rewardImage.sprite = sprite;
-        rewardInfoImage.sprite = sprite;
 
         choiceToWatchAds.gameObject.SetActive(true);
         Scale(choiceToWatchAdsBorder, Vector3.one, 0.5f);
